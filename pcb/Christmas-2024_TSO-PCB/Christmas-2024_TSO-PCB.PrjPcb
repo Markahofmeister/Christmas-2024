@@ -338,8 +338,164 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
+[Document18]
+DocumentPath=Christmas-2024_TSO-PCB.BomDoc
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=0
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=
+
+[Document19]
+DocumentPath=Christmas-2024_TSO-PCB.PCBDwf
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=0
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=YJLBSPTF
+
+[Document20]
+DocumentPath=Christmas-2024_TSO-PCB.OutJob
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=0
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=
+
+[Document21]
+DocumentPath=Christmas-2024_TSO-PCB.Cam
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=0
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=
+
 [GeneratedDocument1]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\BOM\Bill of Materials-Christmas-2024_TSO-PCB.xlsx
+DItemRevisionGUID=
+
+[GeneratedDocument2]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\NC Drill\Christmas-2024_TSO-PCB.DRR
+DItemRevisionGUID=
+
+[GeneratedDocument3]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\Gerber\Christmas-2024_TSO-PCB.EXTREP
+DItemRevisionGUID=
+
+[GeneratedDocument4]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\Gerber\Christmas-2024_TSO-PCB.G1
+DItemRevisionGUID=
+
+[GeneratedDocument5]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\Gerber\Christmas-2024_TSO-PCB.G2
+DItemRevisionGUID=
+
+[GeneratedDocument6]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\Gerber\Christmas-2024_TSO-PCB.GBL
+DItemRevisionGUID=
+
+[GeneratedDocument7]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\Gerber\Christmas-2024_TSO-PCB.GBO
+DItemRevisionGUID=
+
+[GeneratedDocument8]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\Gerber\Christmas-2024_TSO-PCB.GBP
+DItemRevisionGUID=
+
+[GeneratedDocument9]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\Gerber\Christmas-2024_TSO-PCB.GBS
+DItemRevisionGUID=
+
+[GeneratedDocument10]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\Gerber\Christmas-2024_TSO-PCB.GM2
+DItemRevisionGUID=
+
+[GeneratedDocument11]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\Gerber\Christmas-2024_TSO-PCB.GPB
+DItemRevisionGUID=
+
+[GeneratedDocument12]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\Gerber\Christmas-2024_TSO-PCB.GPT
+DItemRevisionGUID=
+
+[GeneratedDocument13]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\Gerber\Christmas-2024_TSO-PCB.GTL
+DItemRevisionGUID=
+
+[GeneratedDocument14]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\Gerber\Christmas-2024_TSO-PCB.GTO
+DItemRevisionGUID=
+
+[GeneratedDocument15]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\Gerber\Christmas-2024_TSO-PCB.GTP
+DItemRevisionGUID=
+
+[GeneratedDocument16]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\Gerber\Christmas-2024_TSO-PCB.GTS
+DItemRevisionGUID=
+
+[GeneratedDocument17]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\NC Drill\Christmas-2024_TSO-PCB.LDP
+DItemRevisionGUID=
+
+[GeneratedDocument18]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\Gerber\Christmas-2024_TSO-PCB.REP
+DItemRevisionGUID=
+
+[GeneratedDocument19]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\Gerber\Christmas-2024_TSO-PCB.RUL
+DItemRevisionGUID=
+
+[GeneratedDocument20]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\NC Drill\Christmas-2024_TSO-PCB.TXT
+DItemRevisionGUID=
+
+[GeneratedDocument21]
 DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\Design Rule Check - Christmas-2024_TSO-PCB.html
+DItemRevisionGUID=
+
+[GeneratedDocument22]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\Pick Place\Pick Place for Christmas-2024_TSO-PCB.csv
+DItemRevisionGUID=
+
+[GeneratedDocument23]
+DocumentPath=Project Outputs for Christmas-2024_TSO-PCB\Pick Place\Pick Place for Christmas-2024_TSO-PCB.txt
 DItemRevisionGUID=
 
 [Configuration1]
