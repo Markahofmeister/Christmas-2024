@@ -64,6 +64,8 @@ static void MX_TIM1_Init(void);
 static void MX_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
 
+void flashInit(void);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -102,6 +104,9 @@ int main(void)
 	  MX_TIM14_Init();
 	  /* USER CODE BEGIN 2 */
 
+
+	  flashInit();
+
 	  /* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -112,7 +117,9 @@ int main(void)
 	{
 	  /* USER CODE END WHILE */
 
+
 	  /* USER CODE BEGIN 3 */
+
 	}
 	/* USER CODE END 3 */
 }
@@ -262,9 +269,9 @@ static void MX_TIM1_Init(void)
 
   /* USER CODE END TIM1_Init 1 */
   htim1.Instance = TIM1;
-  htim1.Init.Prescaler = 0;
+  htim1.Init.Prescaler = 800-1;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim1.Init.Period = 65535;
+  htim1.Init.Period = 100-1;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim1.Init.RepetitionCounter = 0;
   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
@@ -337,9 +344,9 @@ static void MX_TIM3_Init(void)
 
   /* USER CODE END TIM3_Init 1 */
   htim3.Instance = TIM3;
-  htim3.Init.Prescaler = 0;
+  htim3.Init.Prescaler = 800-1;
   htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim3.Init.Period = 65535;
+  htim3.Init.Period = 100-1;
   htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_PWM_Init(&htim3) != HAL_OK)
@@ -485,6 +492,44 @@ static void MX_GPIO_Init(void)
 /* USER CODE END MX_GPIO_Init_2 */
 }
 
+
+void flashInit(void) {
+
+	int pwm = 50;
+	int delay = 30;
+
+	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, pwm);
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, pwm);
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
+	__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, pwm);
+	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+	__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, pwm);
+	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
+
+	GPIO_TypeDef *GPIOPort = GPIOB;
+
+	const uint16_t GPIOPins[16] = {GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_2, GPIO_PIN_3,
+									GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_7,
+									GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11,
+									GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14, GPIO_PIN_15};
+
+	for(int i = 0; i < 16; i++) {
+
+		HAL_GPIO_WritePin(GPIOPort, GPIOPins[i], GPIO_PIN_SET);
+		HAL_Delay(delay);
+		HAL_GPIO_WritePin(GPIOPort, GPIOPins[i], GPIO_PIN_RESET);
+
+	}
+	for(int i = 15; i >= 0; i--) {
+
+		HAL_GPIO_WritePin(GPIOPort, GPIOPins[i], GPIO_PIN_SET);
+		HAL_Delay(delay);
+		HAL_GPIO_WritePin(GPIOPort, GPIOPins[i], GPIO_PIN_RESET);
+
+	}
+
+}
 /* USER CODE BEGIN 4 */
 
 /* USER CODE END 4 */
