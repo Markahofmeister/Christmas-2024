@@ -22,6 +22,27 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+/*
+ * Include board-specific variable mappings
+ */
+#ifndef CHRISTMAS24_VARS_H_
+#include "Christmas24_Vars.h"
+#endif
+
+/*
+ * Include SPI Flash Memeory Driver
+ */
+#ifndef W25QXXX_H_
+#include "W25Qxxx.h"
+#endif
+
+/*
+ * Include I2S Amplifier Driver
+ */
+#ifndef NAU8315YG_H_
+#include "NAU8315YG.h"
+#endif
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -51,6 +72,42 @@ TIM_HandleTypeDef htim14;
 
 /* USER CODE BEGIN PV */
 
+
+/*
+ * Timer to be used for PWMing display
+ */
+//TIM_HandleTypeDef *timerPWM = &htim2;
+
+/*
+ * Timer to be used for non-blocking delays
+ */
+TIM_HandleTypeDef *timerDelay = &htim14;
+
+
+/*
+ * SPI Flash memory struct
+ */
+W25Q spiFlash;
+
+/*
+ * I2S amplifier struct
+ */
+NAU8315YG i2sAmp;
+
+/*
+ * DMA buffers & flags
+ */
+
+// Two buffers to ping-pong in between for SPI RX
+uint8_t spiRxBuff[BUFFER_SIZE];
+
+// Single circular output buffer to TX I2S audio data
+uint16_t i2sTxBuff[BUFFER_SIZE * 2];
+//uint16_t i2sTxBuff[BUFFER_SIZE * 2];
+
+// Variable to keep track of where to read audio data from in memory
+uint32_t flashReadAddr = initialMemoryOffset;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -65,6 +122,30 @@ static void MX_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
 
 void flashInit(void);
+
+/*
+ * Displays non-critical error on debug LED and continues functionality
+ */
+void dispFault();
+
+/*
+ * Displays Critical Error on clock and halts all functionality
+ */
+void dispFailure();
+
+/*
+ * Begins double-buffered DMA streams to provide audio output
+ */
+void startAudioStream(void);
+
+/*
+ * Halts double-buffered DMA streams
+ */
+void stopAudioStream(void);
+
+
+// Fills I2S tx buffer at a given array index offset
+void fillTxBuffer(uint16_t offset);
 
 /* USER CODE END PFP */
 
@@ -104,8 +185,44 @@ int main(void)
 	  MX_TIM14_Init();
 	  /* USER CODE BEGIN 2 */
 
-
 	  flashInit();
+
+
+		// Init Memory Chip
+		uint8_t initRet = W25Q_Init(&spiFlash, nCSPort, nWPPort, nHOLDPort,
+				 nCSPin, nWPPin, nHOLDPin, &hspi2, spiFlash_devID, spiFlash_isQuadChip, spiFlash_driveStrength);
+
+		// Enter error loop if there's an error in initialization
+		if( (initRet == 1) || (initRet == 7) ) {
+			/* Critical Errors:
+			* 1 = Failure to release chip from power down
+			* 7 = Failure to disable write protection
+			*/
+			dispFailure();
+		}
+		else if ( ((initRet >= 2) && (initRet <= 6)) || (initRet == 8) ) {
+			/*
+			* Non-critical Errors:
+			* 2 = Failure to reset chip
+			* 3,6,8 = Failure to read status registers
+			* 4 = Failure to set driver strength
+			* 5 = Failure to read device ID
+			*/
+			dispFault();
+		}
+		else if(initRet == 0) {
+			// initRet = 0 = all is well
+			__NOP();
+		}
+
+
+		// Init i2s amplifier
+		NAU8315YG_Init(&i2sAmp, &hi2s1, i2sAmp_enablePort, i2sAmp_enablePin);
+
+		// Increase SPI clk driver power
+		GPIOA->OSPEEDR |= 0b11;
+
+		startAudioStream();
 
 	  /* USER CODE END 2 */
 
@@ -115,6 +232,8 @@ int main(void)
 
 	while (1)
 	{
+
+
 	  /* USER CODE END WHILE */
 
 
@@ -531,6 +650,132 @@ void flashInit(void) {
 
 }
 /* USER CODE BEGIN 4 */
+
+/*
+ * Displays a non-critical fault to indicate reduced functionality
+ */
+void dispFault(void) {
+	GPIOB->ODR |= 0xFF;
+}
+
+/*
+ * Displays a critical failure and ceases all operations
+ */
+void dispFailure(void) {
+
+//	HAL_TIM_Base_Stop(timerDelay);
+//	HAL_TIM_Base_Start(timerDelay);						// Begin timer 16 counting (to 500 ms)
+//	uint32_t timerVal = __HAL_TIM_GET_COUNTER(timerDelay);	// Get initial timer value to compare to
+//	bool displayBlink = false;
+//
+//
+//	do {
+//
+//		if(__HAL_TIM_GET_COUNTER(timerDelay) - timerVal >= (65535 / 4)) {		// Use hardware timer to blink/beep display
+//
+//			HAL_GPIO_TogglePin(debugLEDPort, debugLEDPin);
+//
+//			timerVal = __HAL_TIM_GET_COUNTER(timerDelay);				// Update timer value
+//
+//			displayBlink = !displayBlink;							// Toggle display blink counter
+//
+//
+//
+//		}
+//
+//
+//	} while(1);
+
+	GPIOB->ODR |= 0xFF;
+
+}
+
+/*
+ * Begins DMA streams to pull data from memory, process data, and push to i2s amplifier.
+ */
+void startAudioStream(void) {
+
+	// Pre-fill TX buffer
+	fillTxBuffer(0);
+	fillTxBuffer(BUFFER_SIZE);
+
+	// Start TX DMA stream
+	HAL_I2S_Transmit_DMA(&hi2s1, i2sTxBuff, BUFFER_SIZE * 2);
+
+	// Enable Amplifier
+	NAU8315YG_AmpEnable(&i2sAmp);
+
+	// Interrupts will take care of the rest.
+
+}
+
+/*
+ * Halts DMA streams
+ */
+void stopAudioStream(void) {
+
+	// Disable Amplifier
+	NAU8315YG_AmpDisable(&i2sAmp);
+
+	// Stop DMA Stream
+	HAL_I2S_DMAStop(&hi2s1);
+
+	// Reset memory address pointer
+	flashReadAddr = initialMemoryOffset;
+
+}
+
+/*
+ * DMA completion callbacks
+ */
+
+void HAL_I2S_TxHalfCpltCallback(I2S_HandleTypeDef *hi2s) {
+
+	// Fill first half of i2s TX buffer
+	fillTxBuffer(0);
+
+
+}
+
+void HAL_I2S_TxCpltCallback(I2S_HandleTypeDef *hi2s) {
+
+	// Fill second half of i2s transmit buffer
+	fillTxBuffer(BUFFER_SIZE);
+
+
+}
+
+void fillTxBuffer(uint16_t offset) {
+
+	// Read next chunk of audio data, increment flash read address
+	W25Q_readData(&spiFlash, flashReadAddr, BUFFER_SIZE, spiRxBuff);
+	flashReadAddr += BUFFER_SIZE;
+
+	// Playing all of a mono file canS-mono-reduced
+	 for(uint16_t i = 0; i < BUFFER_SIZE; i += 2) {
+
+		 i2sTxBuff[offset + (i) + 1] = (spiRxBuff[i + 1] << 8) | spiRxBuff[i];
+
+	 }
+
+
+	// If we have reached the end of the audio clip, reset flash read address
+	if(flashReadAddr > audioAddr_END) {
+		flashReadAddr = initialMemoryOffset;
+	}
+
+
+}
+
+void HAL_I2S_ErrorCallback(I2S_HandleTypeDef *hi2s) {
+
+	//TEST?
+	__NOP();
+
+
+}
+
+
 
 /* USER CODE END 4 */
 

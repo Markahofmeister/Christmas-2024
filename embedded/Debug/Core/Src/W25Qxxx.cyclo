@@ -1,0 +1,15 @@
+../Core/Src/W25Qxxx.c:13:9:W25Q_Init	21
+../Core/Src/W25Qxxx.c:122:19:W25Q_ReleasePowerDown	2
+../Core/Src/W25Qxxx.c:142:19:W25Q_GetIDs	7
+../Core/Src/W25Qxxx.c:202:19:W25Q_EnableWrite	3
+../Core/Src/W25Qxxx.c:225:19:W25Q_DisableWrite	3
+../Core/Src/W25Qxxx.c:248:19:W25Q_ReadStatusReg	8
+../Core/Src/W25Qxxx.c:292:19:W25Q_ReadStatusRegs	2
+../Core/Src/W25Qxxx.c:306:19:W25Q_WriteStatusReg	13
+../Core/Src/W25Qxxx.c:362:19:W25Q_readData	2
+../Core/Src/W25Qxxx.c:386:19:W25Q_readData_DMA	2
+../Core/Src/W25Qxxx.c:410:19:W25Q_ChipErase	1
+../Core/Src/W25Qxxx.c:425:19:W25Q_ChipPowerDown	1
+../Core/Src/W25Qxxx.c:437:19:W25Q_ChipReset	3
+../Core/Src/W25Qxxx.c:466:19:W25Q_QuadEnable	4
+../Core/Src/W25Qxxx.c:493:19:W25Q_SetDriverStrength	4
