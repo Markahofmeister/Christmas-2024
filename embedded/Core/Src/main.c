@@ -110,20 +110,14 @@ uint8_t spiRxBuff[BUFFER_SIZE];
 uint16_t i2sTxBuff[BUFFER_SIZE * 2];
 //uint16_t i2sTxBuff[BUFFER_SIZE * 2];
 
-// Variable to keep track of where to read audio data from in memory
-uint32_t flashReadAddr;
-
 // Shall jam be started?
 bool jamStart = false;
 
 // Are we already jamming?
 bool inJam = false;
 
-// Offset of flash memory (first byte to read)
-uint8_t initialMemoryOffset = 0;
-
-// Used to keep track of where the song is and trigger LED changes.
-uint32_t songIndex = 0;
+// Variable to keep track of where to read audio data from in memory
+uint32_t flashReadAddr = initialMemoryOffset;
 
 /* USER CODE END PV */
 
@@ -241,12 +235,12 @@ int main(void)
 		// Increase SPI clk driver power
 		GPIOA->OSPEEDR |= 0b11;
 
-		float songIndexFloat = (float)songStart * 9.8667;
-		songIndex = (uint8_t)songIndexFloat;
-
-		initialMemoryOffset += songStart * (uint32_t)(88200 / 8);
-
-		flashReadAddr = initialMemoryOffset;
+//		float songIndexFloat = (float)songStart * 9.8667;
+//		songIndex = (uint8_t)songIndexFloat;
+//
+//		initialMemoryOffset += songStart * (uint32_t)(88200 / 8);
+//
+//		flashReadAddr = initialMemoryOffset;
 
 	  /* USER CODE END 2 */
 
