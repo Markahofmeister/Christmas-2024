@@ -1,7 +1,7 @@
 clear
 clc
 
-wav = fread(fopen('beethoven-stereo-2_duplicate-channels.wav', 'r'), [1 , Inf], 'uint8');
+wav = fread(fopen('WIW-stereo-shortened_duplicate-channels_quiet_extra.wav', 'r'), [1 , Inf], 'uint8');
 t = 1 : 1 : length(wav);
 x = length(t) / 2;
 offset = 45;
@@ -30,7 +30,7 @@ newWav = wav(1:offset - 1);
 wav_6 = [newWav wav_6];
 
 % Write to new reduced file. 
-file = fopen('beethoven-stereo-2_duplicate-channels-reduced_with-header.wav', 'w');
+file = fopen(['WIW-reduced_with-header_quiet_extra.wav'], 'w');
 fwrite(file, wav_6);
 fclose(file);
 

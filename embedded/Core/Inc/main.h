@@ -93,6 +93,9 @@ void Error_Handler(void);
 #define PWM_3_GPIO_Port GPIOC
 #define AMP_ENABLE_Pin GPIO_PIN_0
 #define AMP_ENABLE_GPIO_Port GPIOD
+#define JAM_BUTTON_EXTI_Pin GPIO_PIN_1
+#define JAM_BUTTON_EXTI_GPIO_Port GPIOD
+#define JAM_BUTTON_EXTI_EXTI_IRQn EXTI0_1_IRQn
 #define LED3_Pin GPIO_PIN_3
 #define LED3_GPIO_Port GPIOB
 #define LED4_Pin GPIO_PIN_4

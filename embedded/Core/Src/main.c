@@ -69,19 +69,24 @@ SPI_HandleTypeDef hspi2;
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim3;
 TIM_HandleTypeDef htim14;
+TIM_HandleTypeDef htim16;
 
 /* USER CODE BEGIN PV */
 
 
 /*
- * Timer to be used for PWMing display
+ * Timers
  */
-//TIM_HandleTypeDef *timerPWM = &htim2;
 
-/*
- * Timer to be used for non-blocking delays
- */
+
+// Timer to be used for non-blocking delays
 TIM_HandleTypeDef *timerDelay = &htim14;
+
+// Timer(s) to PWM display
+TIM_HandleTypeDef *timerPWM[4] = {&htim1, &htim1, &htim3, &htim3};
+
+// Timer to time LED changes
+TIM_HandleTypeDef *timerLED = &htim16;
 
 
 /*
@@ -106,7 +111,19 @@ uint16_t i2sTxBuff[BUFFER_SIZE * 2];
 //uint16_t i2sTxBuff[BUFFER_SIZE * 2];
 
 // Variable to keep track of where to read audio data from in memory
-uint32_t flashReadAddr = initialMemoryOffset;
+uint32_t flashReadAddr;
+
+// Shall jam be started?
+bool jamStart = false;
+
+// Are we already jamming?
+bool inJam = false;
+
+// Offset of flash memory (first byte to read)
+uint8_t initialMemoryOffset = 0;
+
+// Used to keep track of where the song is and trigger LED changes.
+uint32_t songIndex = 0;
 
 /* USER CODE END PV */
 
@@ -119,6 +136,7 @@ static void MX_SPI2_Init(void);
 static void MX_TIM14_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_TIM3_Init(void);
+static void MX_TIM16_Init(void);
 /* USER CODE BEGIN PFP */
 
 void flashInit(void);
@@ -183,6 +201,7 @@ int main(void)
 	  MX_TIM1_Init();
 	  MX_TIM3_Init();
 	  MX_TIM14_Init();
+	  MX_TIM16_Init();
 	  /* USER CODE BEGIN 2 */
 
 	  flashInit();
@@ -222,7 +241,12 @@ int main(void)
 		// Increase SPI clk driver power
 		GPIOA->OSPEEDR |= 0b11;
 
-		startAudioStream();
+		float songIndexFloat = (float)songStart * 9.8667;
+		songIndex = (uint8_t)songIndexFloat;
+
+		initialMemoryOffset += songStart * (uint32_t)(88200 / 8);
+
+		flashReadAddr = initialMemoryOffset;
 
 	  /* USER CODE END 2 */
 
@@ -233,6 +257,9 @@ int main(void)
 	while (1)
 	{
 
+		if(jamStart && !inJam) {
+			startAudioStream();
+		}
 
 	  /* USER CODE END WHILE */
 
@@ -529,6 +556,38 @@ static void MX_TIM14_Init(void)
 }
 
 /**
+  * @brief TIM16 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM16_Init(void)
+{
+
+  /* USER CODE BEGIN TIM16_Init 0 */
+
+  /* USER CODE END TIM16_Init 0 */
+
+  /* USER CODE BEGIN TIM16_Init 1 */
+
+  /* USER CODE END TIM16_Init 1 */
+  htim16.Instance = TIM16;
+  htim16.Init.Prescaler = 127;
+  htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim16.Init.Period = 50674;
+  htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim16.Init.RepetitionCounter = 0;
+  htim16.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim16) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM16_Init 2 */
+
+  /* USER CODE END TIM16_Init 2 */
+
+}
+
+/**
   * Enable DMA controller clock
   */
 static void MX_DMA_Init(void)
@@ -601,30 +660,35 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(AMP_ENABLE_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PD1 */
-  GPIO_InitStruct.Pin = GPIO_PIN_1;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+  /*Configure GPIO pin : JAM_BUTTON_EXTI_Pin */
+  GPIO_InitStruct.Pin = JAM_BUTTON_EXTI_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(JAM_BUTTON_EXTI_GPIO_Port, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI0_1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI0_1_IRQn);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
 }
 
+/* USER CODE BEGIN 4 */
 
 void flashInit(void) {
 
-	int pwm = 50;
-	int delay = 30;
+	uint8_t initPWM = 50;
+	uint8_t delay = 1;
 
-	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, pwm);
-	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, pwm);
-	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
-	__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, pwm);
-	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
-	__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, pwm);
-	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
+	__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], initPWM);
+	HAL_TIM_PWM_Start(timerPWM[0], PWMChannels[0]);
+	__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], initPWM);
+	HAL_TIM_PWM_Start(timerPWM[1], PWMChannels[1]);
+	__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], initPWM);
+	HAL_TIM_PWM_Start(timerPWM[2], PWMChannels[2]);
+	__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], initPWM);
+	HAL_TIM_PWM_Start(timerPWM[3], PWMChannels[3]);
 
 	GPIO_TypeDef *GPIOPort = GPIOB;
 
@@ -649,13 +713,38 @@ void flashInit(void) {
 	}
 
 }
-/* USER CODE BEGIN 4 */
+
+/*
+ * General Falling-Edge EXTI Callback function
+ *
+ * Internal conditional determines which function to call
+ * based on which button was pressed.
+ */
+void HAL_GPIO_EXTI_Falling_Callback(uint16_t GPIO_Pin) {
+
+	if(GPIO_Pin == jamButtonPin) {
+		jamStart = true;
+	}
+
+}
+
+/*
+ * Used for LED Timing
+ *
+ */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+
+	GPIOB->ODR = leds[songIndex];
+
+	songIndex++;
+
+}
 
 /*
  * Displays a non-critical fault to indicate reduced functionality
  */
 void dispFault(void) {
-	GPIOB->ODR |= 0xFF;
+	GPIOB->ODR |= 0xFFFF;
 }
 
 /*
@@ -686,7 +775,7 @@ void dispFailure(void) {
 //
 //	} while(1);
 
-	GPIOB->ODR |= 0xFF;
+	GPIOB->ODR |= 0xFFFF;
 
 }
 
@@ -694,6 +783,12 @@ void dispFailure(void) {
  * Begins DMA streams to pull data from memory, process data, and push to i2s amplifier.
  */
 void startAudioStream(void) {
+
+	// We are in jam now.
+	inJam = true;
+
+	// Reset so as to not trigger it again
+	jamStart = false;
 
 	// Pre-fill TX buffer
 	fillTxBuffer(0);
@@ -704,6 +799,9 @@ void startAudioStream(void) {
 
 	// Enable Amplifier
 	NAU8315YG_AmpEnable(&i2sAmp);
+
+	// Start LED timer
+	HAL_TIM_Base_Start_IT(timerLED);
 
 	// Interrupts will take care of the rest.
 
@@ -722,6 +820,15 @@ void stopAudioStream(void) {
 
 	// Reset memory address pointer
 	flashReadAddr = initialMemoryOffset;
+
+	// Not jamming anymore
+	inJam = false;
+
+	// Reset song index
+	songIndex = 0;
+
+	// Stop LED timer
+	HAL_TIM_Base_Stop_IT(timerLED);
 
 }
 
@@ -761,7 +868,7 @@ void fillTxBuffer(uint16_t offset) {
 
 	// If we have reached the end of the audio clip, reset flash read address
 	if(flashReadAddr > audioAddr_END) {
-		flashReadAddr = initialMemoryOffset;
+		stopAudioStream();
 	}
 
 
