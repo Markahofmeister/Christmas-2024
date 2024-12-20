@@ -70,6 +70,7 @@ TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim3;
 TIM_HandleTypeDef htim14;
 TIM_HandleTypeDef htim16;
+TIM_HandleTypeDef htim17;
 
 /* USER CODE BEGIN PV */
 
@@ -87,6 +88,9 @@ TIM_HandleTypeDef *timerPWM[4] = {&htim1, &htim1, &htim3, &htim3};
 
 // Timer to time LED changes
 TIM_HandleTypeDef *timerLED = &htim16;
+
+// Timer to perform dimming
+TIM_HandleTypeDef *timerDim = &htim17;
 
 
 /*
@@ -119,6 +123,13 @@ bool inJam = false;
 // Variable to keep track of where to read audio data from in memory
 uint32_t flashReadAddr = initialMemoryOffset;
 
+// Used to keep track of where the song is and trigger LED changes.
+uint32_t songIndex = 0;
+
+uint32_t dimIndex = 0;
+
+uint8_t systemPWM = 50;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -131,6 +142,7 @@ static void MX_TIM14_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_TIM3_Init(void);
 static void MX_TIM16_Init(void);
+static void MX_TIM17_Init(void);
 /* USER CODE BEGIN PFP */
 
 void flashInit(void);
@@ -196,6 +208,7 @@ int main(void)
 	  MX_TIM3_Init();
 	  MX_TIM14_Init();
 	  MX_TIM16_Init();
+	  MX_TIM17_Init();
 	  /* USER CODE BEGIN 2 */
 
 	  flashInit();
@@ -582,6 +595,38 @@ static void MX_TIM16_Init(void)
 }
 
 /**
+  * @brief TIM17 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM17_Init(void)
+{
+
+  /* USER CODE BEGIN TIM17_Init 0 */
+
+  /* USER CODE END TIM17_Init 0 */
+
+  /* USER CODE BEGIN TIM17_Init 1 */
+
+  /* USER CODE END TIM17_Init 1 */
+  htim17.Instance = TIM17;
+  htim17.Init.Prescaler = 4-1;
+  htim17.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim17.Init.Period = 63999;
+  htim17.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim17.Init.RepetitionCounter = 0;
+  htim17.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim17) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM17_Init 2 */
+
+  /* USER CODE END TIM17_Init 2 */
+
+}
+
+/**
   * Enable DMA controller clock
   */
 static void MX_DMA_Init(void)
@@ -672,7 +717,7 @@ static void MX_GPIO_Init(void)
 
 void flashInit(void) {
 
-	uint8_t initPWM = 50;
+	uint8_t initPWM = systemPWM;
 	uint8_t delay = 1;
 
 	__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], initPWM);
@@ -728,9 +773,34 @@ void HAL_GPIO_EXTI_Falling_Callback(uint16_t GPIO_Pin) {
  */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 
-	GPIOB->ODR = leds[songIndex];
 
-	songIndex++;
+	if(htim == timerLED) {
+		GPIOB->ODR = leds[songIndex];
+
+		if(songIndex == 503) {
+			// Start timer to change PWM duty cycle
+			HAL_TIM_Base_Start_IT(timerDim);
+		}
+		else if(songIndex == 1000) {
+			HAL_TIM_Base_Stop_IT(timerDim);
+		}
+
+		songIndex++;
+	}
+
+	else if(htim == timerDim) {
+
+		__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], dimBuff[dimIndex]);
+		__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], dimBuff[dimIndex]);
+		__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], dimBuff[DIM_SIZE - dimIndex - 1]);
+		__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], dimBuff[DIM_SIZE - dimIndex - 1]);
+		dimIndex++;
+		if(dimIndex == DIM_SIZE) {
+			dimIndex = 0;
+		}
+
+	}
+
 
 }
 
