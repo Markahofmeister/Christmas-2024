@@ -128,6 +128,8 @@ uint32_t songIndex = 0;
 
 uint32_t dimIndex = 0;
 
+uint8_t dimNum = 0;
+
 uint8_t systemPWM = 50;
 
 /* USER CODE END PV */
@@ -780,24 +782,72 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 		if(songIndex == 503) {
 			// Start timer to change PWM duty cycle
 			HAL_TIM_Base_Start_IT(timerDim);
+			dimNum = 1;
 		}
-		else if(songIndex == 1000) {
+		else if(songIndex == 575) {
+			HAL_TIM_Base_Start_IT(timerDim);
+			dimNum = 2;
+			dimIndex = 0;
+
+			__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], systemPWM);
+			__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], systemPWM);
+		}
+		else if (songIndex == 629) {
+			HAL_TIM_Base_Start_IT(timerDim);
+			dimNum = 3;
+			dimIndex = 0;
+
+			__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], systemPWM);
+			__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], systemPWM);
+		}
+		else if (songIndex == 693) {
+			dimNum = 4;
+			dimIndex = 0;
 			HAL_TIM_Base_Stop_IT(timerDim);
+			__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], systemPWM);
+			__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], systemPWM);
+			__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], systemPWM);
+			__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], systemPWM);
+
 		}
+
 
 		songIndex++;
 	}
 
 	else if(htim == timerDim) {
 
-		__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], dimBuff[dimIndex]);
-		__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], dimBuff[dimIndex]);
-		__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], dimBuff[DIM_SIZE - dimIndex - 1]);
-		__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], dimBuff[DIM_SIZE - dimIndex - 1]);
-		dimIndex++;
-		if(dimIndex == DIM_SIZE) {
-			dimIndex = 0;
+		if(dimNum == 1) {
+			__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], dimBuff[dimIndex]);
+			__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], dimBuff[dimIndex]);
+			__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], dimBuff[DIM_SIZE - dimIndex - 1]);
+			__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], dimBuff[DIM_SIZE - dimIndex - 1]);
+			dimIndex++;
+			if(dimIndex == DIM_SIZE) {
+				dimIndex = 0;
+			}
+
 		}
+		else if (dimNum == 2) {
+			__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], dimBuff[dimIndex]);
+			__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], dimBuff[dimIndex]);
+
+			dimIndex++;
+			if(dimIndex == DIM_SIZE) {
+				dimIndex = 0;
+			}
+		}
+		else if (dimNum == 3) {
+			__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], dimBuff[dimIndex]);
+			__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], dimBuff[dimIndex]);
+
+			dimIndex++;
+			if(dimIndex == DIM_SIZE) {
+				dimIndex = 0;
+			}
+		}
+
+
 
 	}
 
