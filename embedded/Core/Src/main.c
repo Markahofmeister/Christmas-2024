@@ -124,7 +124,9 @@ bool inJam = false;
 uint32_t flashReadAddr = initialMemoryOffset;
 
 // Used to keep track of where the song is and trigger LED changes.
-uint32_t songIndex = 0;
+uint32_t songIndex = 972;
+
+uint8_t audioEn = 0;
 
 uint32_t dimIndex = 0;
 
@@ -810,6 +812,76 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 			__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], systemPWM);
 
 		}
+		else if (songIndex == 973) {
+			dimNum = 5;
+			dimIndex = 0;
+			HAL_TIM_Base_Start_IT(timerDim);
+
+
+		}
+		else if (songIndex == 1039) {
+			dimNum = 6;
+			dimIndex = 0;
+			timerDim->Instance->PSC = 5-1;
+			timerDim->Instance->ARR = 63999;
+			HAL_TIM_Base_Start_IT(timerDim);
+		}
+		else if (songIndex == 1039 + 8) {
+			dimNum = 7;
+			dimIndex = 0;
+			HAL_TIM_Base_Stop_IT(timerDim);
+			timerDim->Instance->CNT = 0;
+			HAL_TIM_Base_Start_IT(timerDim);
+		}
+		else if (songIndex == 1039 + 16) {
+			dimNum = 8;
+			dimIndex = 0;
+			HAL_TIM_Base_Stop_IT(timerDim);
+			timerDim->Instance->CNT = 0;
+			HAL_TIM_Base_Start_IT(timerDim);
+		}
+		else if (songIndex == 1039 + 24) {
+			dimNum = 9;
+			dimIndex = 0;
+			HAL_TIM_Base_Stop_IT(timerDim);
+			timerDim->Instance->CNT = 0;
+			HAL_TIM_Base_Start_IT(timerDim);
+		}
+		else if (songIndex == 1039 + 32) {
+			dimNum = 10;
+			dimIndex = 0;
+			HAL_TIM_Base_Stop_IT(timerDim);
+			timerDim->Instance->CNT = 0;
+			HAL_TIM_Base_Start_IT(timerDim);
+		}
+		else if (songIndex == 1039 + 40) {
+			dimNum = 11;
+			dimIndex = 0;
+			HAL_TIM_Base_Stop_IT(timerDim);
+			timerDim->Instance->CNT = 0;
+			HAL_TIM_Base_Start_IT(timerDim);
+		}
+		else if (songIndex == 1039 + 48) {
+			dimNum = 12;
+			dimIndex = 0;
+			HAL_TIM_Base_Stop_IT(timerDim);
+			timerDim->Instance->CNT = 0;
+			HAL_TIM_Base_Start_IT(timerDim);
+		}
+		else if (songIndex == 1039 + 56) {
+			dimNum = 13;
+			dimIndex = 0;
+			HAL_TIM_Base_Stop_IT(timerDim);
+			timerDim->Instance->CNT = 0;
+			HAL_TIM_Base_Start_IT(timerDim);
+		}
+		else if (songIndex == 1039 + 64) {
+			dimNum = 14;
+			dimIndex = 0;
+			HAL_TIM_Base_Stop_IT(timerDim);
+			timerDim->Instance->CNT = 0;
+			HAL_TIM_Base_Start_IT(timerDim);
+		}
 
 
 		songIndex++;
@@ -845,6 +917,29 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 			if(dimIndex == DIM_SIZE) {
 				dimIndex = 0;
 			}
+		}
+		else if (dimNum == 5) {
+			__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], dimBuff[dimIndex]);
+			__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], dimBuff[dimIndex]);
+			__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], dimBuff[DIM_SIZE - dimIndex - 1]);
+			__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], dimBuff[DIM_SIZE - dimIndex - 1]);
+			dimIndex++;
+			if(dimIndex == DIM_SIZE) {
+				dimIndex = 0;
+			}
+		}
+		else if (dimNum >= 6 && dimNum <= 14) {
+
+			if(dimIndex < DIM_SIZE + 100) {
+				__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], dimBuff2[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], dimBuff2[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], dimBuff2[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], dimBuff2[dimIndex]);
+				dimIndex++;
+			}
+		}
+		else if (dimNum == 15) {
+
 		}
 
 
@@ -912,7 +1007,9 @@ void startAudioStream(void) {
 	HAL_I2S_Transmit_DMA(&hi2s1, i2sTxBuff, BUFFER_SIZE * 2);
 
 	// Enable Amplifier
-	NAU8315YG_AmpEnable(&i2sAmp);
+	if(audioEn) {
+		NAU8315YG_AmpEnable(&i2sAmp);
+	}
 
 	// Start LED timer
 	HAL_TIM_Base_Start_IT(timerLED);
