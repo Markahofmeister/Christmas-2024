@@ -4808,11 +4808,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  8001eb6:	4b60      	ldr	r3, [pc, #384]	@ (8002038 <HAL_TIM_PeriodElapsedCallback+0x6b8>)
  8001eb8:	2200      	movs	r2, #0
  8001eba:	601a      	str	r2, [r3, #0]
-			timerDim->Instance->PSC = 5-1;
+			timerDim->Instance->PSC = 3-1;
  8001ebc:	4b5f      	ldr	r3, [pc, #380]	@ (800203c <HAL_TIM_PeriodElapsedCallback+0x6bc>)
  8001ebe:	681b      	ldr	r3, [r3, #0]
  8001ec0:	681b      	ldr	r3, [r3, #0]
- 8001ec2:	2204      	movs	r2, #4
+ 8001ec2:	2202      	movs	r2, #2
  8001ec4:	629a      	str	r2, [r3, #40]	@ 0x28
 			timerDim->Instance->ARR = 63999;
  8001ec6:	4b5d      	ldr	r3, [pc, #372]	@ (800203c <HAL_TIM_PeriodElapsedCallback+0x6bc>)

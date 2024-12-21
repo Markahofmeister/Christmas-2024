@@ -822,7 +822,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 		else if (songIndex == 1039) {
 			dimNum = 6;
 			dimIndex = 0;
-			timerDim->Instance->PSC = 5-1;
+			timerDim->Instance->PSC = 3-1;
 			timerDim->Instance->ARR = 63999;
 			HAL_TIM_Base_Start_IT(timerDim);
 		}
@@ -931,10 +931,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 		else if (dimNum >= 6 && dimNum <= 14) {
 
 			if(dimIndex < DIM_SIZE + 100) {
-				__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], dimBuff2[dimIndex]);
-				__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], dimBuff2[dimIndex]);
-				__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], dimBuff2[dimIndex]);
-				__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], dimBuff2[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], 100-dimBuff2[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], 100-dimBuff2[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], 100-dimBuff2[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], 100-dimBuff2[dimIndex]);
 				dimIndex++;
 			}
 		}
