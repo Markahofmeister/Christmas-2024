@@ -1,0 +1,6 @@
+clear
+clc
+
+v = round(logspace(0,2,101))
+writematrix(v, "dimLog.csv");
+t1 = ro0:0.5:

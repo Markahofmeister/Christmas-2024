@@ -124,15 +124,17 @@ bool inJam = false;
 uint32_t flashReadAddr = initialMemoryOffset;
 
 // Used to keep track of where the song is and trigger LED changes.
-uint32_t songIndex = 972;
+uint32_t songIndex = 0;
 
-uint8_t audioEn = 0;
+uint8_t audioEn = 1;
 
 uint32_t dimIndex = 0;
 
 uint8_t dimNum = 0;
 
 uint8_t systemPWM = 50;
+
+uint32_t timerChangeIndex[3] = {1034, 0x00, 0x00};
 
 /* USER CODE END PV */
 
@@ -252,12 +254,8 @@ int main(void)
 		// Increase SPI clk driver power
 		GPIOA->OSPEEDR |= 0b11;
 
-//		float songIndexFloat = (float)songStart * 9.8667;
-//		songIndex = (uint8_t)songIndexFloat;
-//
-//		initialMemoryOffset += songStart * (uint32_t)(88200 / 8);
-//
-//		flashReadAddr = initialMemoryOffset;
+		timerChangeIndex[1] = timerChangeIndex[0] + 72;
+		timerChangeIndex[2] = timerChangeIndex[1] + 64;
 
 	  /* USER CODE END 2 */
 
@@ -819,70 +817,137 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 
 
 		}
-		else if (songIndex == 1039) {
-			dimNum = 6;
+		else if (songIndex == timerChangeIndex[0]) {
+			HAL_TIM_Base_Stop_IT(timerDim);
+			dimIndex = 6;
 			dimIndex = 0;
+			timerDim->Instance->CNT = 0;
 			timerDim->Instance->PSC = 3-1;
-			timerDim->Instance->ARR = 63999;
+			timerDim->Instance->ARR = 50000;
 			HAL_TIM_Base_Start_IT(timerDim);
 		}
-		else if (songIndex == 1039 + 8) {
+		else if (songIndex == timerChangeIndex[0] + 8) {
 			dimNum = 7;
 			dimIndex = 0;
 			HAL_TIM_Base_Stop_IT(timerDim);
 			timerDim->Instance->CNT = 0;
 			HAL_TIM_Base_Start_IT(timerDim);
 		}
-		else if (songIndex == 1039 + 16) {
+		else if (songIndex == timerChangeIndex[0] + 16) {
 			dimNum = 8;
 			dimIndex = 0;
 			HAL_TIM_Base_Stop_IT(timerDim);
 			timerDim->Instance->CNT = 0;
 			HAL_TIM_Base_Start_IT(timerDim);
 		}
-		else if (songIndex == 1039 + 24) {
+		else if (songIndex == timerChangeIndex[0] + 24) {
 			dimNum = 9;
 			dimIndex = 0;
 			HAL_TIM_Base_Stop_IT(timerDim);
 			timerDim->Instance->CNT = 0;
 			HAL_TIM_Base_Start_IT(timerDim);
 		}
-		else if (songIndex == 1039 + 32) {
+		else if (songIndex == timerChangeIndex[0] + 32) {
 			dimNum = 10;
 			dimIndex = 0;
 			HAL_TIM_Base_Stop_IT(timerDim);
 			timerDim->Instance->CNT = 0;
 			HAL_TIM_Base_Start_IT(timerDim);
 		}
-		else if (songIndex == 1039 + 40) {
+		else if (songIndex == timerChangeIndex[0] + 40) {
 			dimNum = 11;
 			dimIndex = 0;
 			HAL_TIM_Base_Stop_IT(timerDim);
 			timerDim->Instance->CNT = 0;
 			HAL_TIM_Base_Start_IT(timerDim);
 		}
-		else if (songIndex == 1039 + 48) {
+		else if (songIndex == timerChangeIndex[0] + 48) {
 			dimNum = 12;
 			dimIndex = 0;
 			HAL_TIM_Base_Stop_IT(timerDim);
 			timerDim->Instance->CNT = 0;
 			HAL_TIM_Base_Start_IT(timerDim);
 		}
-		else if (songIndex == 1039 + 56) {
+		else if (songIndex == timerChangeIndex[0] + 56) {
 			dimNum = 13;
 			dimIndex = 0;
 			HAL_TIM_Base_Stop_IT(timerDim);
 			timerDim->Instance->CNT = 0;
 			HAL_TIM_Base_Start_IT(timerDim);
 		}
-		else if (songIndex == 1039 + 64) {
-			dimNum = 14;
+		else if (songIndex == timerChangeIndex[0] + 64) {
+			dimNum = 135;
 			dimIndex = 0;
 			HAL_TIM_Base_Stop_IT(timerDim);
 			timerDim->Instance->CNT = 0;
 			HAL_TIM_Base_Start_IT(timerDim);
 		}
+		else if (songIndex == timerChangeIndex[1]) {
+			dimNum = 14;
+			dimIndex = 0;
+			HAL_TIM_Base_Stop_IT(timerDim);
+			timerDim->Instance->PSC = 5-1;
+			timerDim->Instance->ARR = 60000;
+			timerDim->Instance->CNT = 0;
+			HAL_TIM_Base_Start_IT(timerDim);
+		}
+		else if (songIndex == timerChangeIndex[1] + 16) {
+			dimNum = 15;
+			dimIndex = 0;
+			HAL_TIM_Base_Stop_IT(timerDim);
+			timerDim->Instance->CNT = 0;
+			HAL_TIM_Base_Start_IT(timerDim);
+		}
+		else if (songIndex == timerChangeIndex[1] + 32) {
+			dimNum = 16;
+			dimIndex = 0;
+			HAL_TIM_Base_Stop_IT(timerDim);
+			timerDim->Instance->CNT = 0;
+			HAL_TIM_Base_Start_IT(timerDim);
+		}
+		else if (songIndex == timerChangeIndex[1] + 48) {
+			dimNum = 17;
+			dimIndex = 0;
+			HAL_TIM_Base_Stop_IT(timerDim);
+			timerDim->Instance->CNT = 0;
+			HAL_TIM_Base_Start_IT(timerDim);
+		}
+		else if (songIndex == timerChangeIndex[2]) {
+			dimNum = 18;
+			dimIndex = 0;
 
+			timerPWM[0]->Instance->ARR = 800;
+			timerPWM[2]->Instance->ARR = 800;
+			HAL_TIM_PWM_Start(timerPWM[0], PWMChannels[0]);
+			HAL_TIM_PWM_Start(timerPWM[1], PWMChannels[1]);
+			HAL_TIM_PWM_Start(timerPWM[2], PWMChannels[2]);
+			HAL_TIM_PWM_Start(timerPWM[3], PWMChannels[3]);
+
+			HAL_TIM_Base_Stop_IT(timerDim);
+			timerDim->Instance->PSC = 5-1;
+			timerDim->Instance->ARR = 60000;
+			timerDim->Instance->CNT = 0;
+			HAL_TIM_Base_Start_IT(timerDim);
+		}
+		else if (songIndex == timerChangeIndex[2] + 64) {
+
+			HAL_TIM_Base_Stop_IT(timerDim);
+
+			dimNum = 19;
+			dimIndex = 0;
+
+			timerPWM[0]->Instance->ARR = 100;
+			timerPWM[2]->Instance->ARR = 100;
+			__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], systemPWM);
+			__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], systemPWM);
+			__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], systemPWM);
+			__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], systemPWM);
+			HAL_TIM_PWM_Start(timerPWM[0], PWMChannels[0]);
+			HAL_TIM_PWM_Start(timerPWM[1], PWMChannels[1]);
+			HAL_TIM_PWM_Start(timerPWM[2], PWMChannels[2]);
+			HAL_TIM_PWM_Start(timerPWM[3], PWMChannels[3]);
+
+		}
 
 		songIndex++;
 	}
@@ -928,21 +993,36 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 				dimIndex = 0;
 			}
 		}
-		else if (dimNum >= 6 && dimNum <= 14) {
+		else if (dimNum >= 6 && dimNum <= 13) {
 
 			if(dimIndex < DIM_SIZE + 100) {
-				__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], 100-dimBuff2[dimIndex]);
-				__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], 100-dimBuff2[dimIndex]);
-				__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], 100-dimBuff2[dimIndex]);
-				__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], 100-dimBuff2[dimIndex]);
-				dimIndex++;
+				__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], dimBuff2[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], dimBuff2[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], dimBuff2[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], dimBuff2[dimIndex]);
+				dimIndex += 1;
 			}
 		}
-		else if (dimNum == 15) {
+		else if ((dimNum >= 13 && dimNum <= 17) || dimNum == 135) {
+
+			if(dimIndex < DIM_SIZE + 100) {
+				__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], dimBuff2[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], dimBuff2[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], dimBuff2[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], dimBuff2[dimIndex]);
+				dimIndex += 1;
+			}
 
 		}
-
-
+		else if (dimNum == 18) {
+			if(dimIndex < 801) {
+				__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], dimBuffLog[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], dimBuffLog[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], dimBuffLog[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], dimBuffLog[dimIndex]);
+				dimIndex += 1;
+			}
+		}
 
 	}
 
