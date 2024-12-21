@@ -929,7 +929,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 			timerDim->Instance->CNT = 0;
 			HAL_TIM_Base_Start_IT(timerDim);
 		}
-		else if (songIndex == timerChangeIndex[2] + 64) {
+		else if (songIndex == timerChangeIndex[2] + 53) {
 
 			HAL_TIM_Base_Stop_IT(timerDim);
 

@@ -37,15 +37,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  00016f28  00000000  00000000  0001eb1c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00012d15  00000000  00000000  00035a44  2**0
+ 17 .debug_line   00012d19  00000000  00000000  00035a44  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00091777  00000000  00000000  00048759  2**0
+ 18 .debug_str    00091777  00000000  00000000  0004875d  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000d9ed0  2**0
+ 19 .comment      00000043  00000000  00000000  000d9ed4  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00003904  00000000  00000000  000d9f14  2**2
+ 20 .debug_frame  00003904  00000000  00000000  000d9f18  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 0000004d  00000000  00000000  000dd818  2**0
+ 21 .debug_line_str 0000004d  00000000  00000000  000dd81c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -5042,701 +5042,702 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  800207c:	0000c350 	.word	0x0000c350
 		}
 		else if (songIndex == timerChangeIndex[0] + 48) {
- 8002080:	4be1      	ldr	r3, [pc, #900]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
+ 8002080:	4bdd      	ldr	r3, [pc, #884]	@ (80023f8 <HAL_TIM_PeriodElapsedCallback+0xa5c>)
  8002082:	681b      	ldr	r3, [r3, #0]
  8002084:	3330      	adds	r3, #48	@ 0x30
  8002086:	001a      	movs	r2, r3
- 8002088:	4be0      	ldr	r3, [pc, #896]	@ (800240c <HAL_TIM_PeriodElapsedCallback+0xa70>)
+ 8002088:	4bdc      	ldr	r3, [pc, #880]	@ (80023fc <HAL_TIM_PeriodElapsedCallback+0xa60>)
  800208a:	681b      	ldr	r3, [r3, #0]
  800208c:	429a      	cmp	r2, r3
  800208e:	d115      	bne.n	80020bc <HAL_TIM_PeriodElapsedCallback+0x720>
 			dimNum = 12;
- 8002090:	4bdf      	ldr	r3, [pc, #892]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
+ 8002090:	4bdb      	ldr	r3, [pc, #876]	@ (8002400 <HAL_TIM_PeriodElapsedCallback+0xa64>)
  8002092:	220c      	movs	r2, #12
  8002094:	701a      	strb	r2, [r3, #0]
 			dimIndex = 0;
- 8002096:	4bdf      	ldr	r3, [pc, #892]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
+ 8002096:	4bdb      	ldr	r3, [pc, #876]	@ (8002404 <HAL_TIM_PeriodElapsedCallback+0xa68>)
  8002098:	2200      	movs	r2, #0
  800209a:	601a      	str	r2, [r3, #0]
 			HAL_TIM_Base_Stop_IT(timerDim);
- 800209c:	4bde      	ldr	r3, [pc, #888]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 800209c:	4bda      	ldr	r3, [pc, #872]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  800209e:	681b      	ldr	r3, [r3, #0]
  80020a0:	0018      	movs	r0, r3
  80020a2:	f005 f86d 	bl	8007180 <HAL_TIM_Base_Stop_IT>
 			timerDim->Instance->CNT = 0;
- 80020a6:	4bdc      	ldr	r3, [pc, #880]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 80020a6:	4bd8      	ldr	r3, [pc, #864]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  80020a8:	681b      	ldr	r3, [r3, #0]
  80020aa:	681b      	ldr	r3, [r3, #0]
  80020ac:	2200      	movs	r2, #0
  80020ae:	625a      	str	r2, [r3, #36]	@ 0x24
 			HAL_TIM_Base_Start_IT(timerDim);
- 80020b0:	4bd9      	ldr	r3, [pc, #868]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 80020b0:	4bd5      	ldr	r3, [pc, #852]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  80020b2:	681b      	ldr	r3, [r3, #0]
  80020b4:	0018      	movs	r0, r3
  80020b6:	f005 f80f 	bl	80070d8 <HAL_TIM_Base_Start_IT>
  80020ba:	e266      	b.n	800258a <HAL_TIM_PeriodElapsedCallback+0xbee>
 		}
 		else if (songIndex == timerChangeIndex[0] + 56) {
- 80020bc:	4bd2      	ldr	r3, [pc, #840]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
+ 80020bc:	4bce      	ldr	r3, [pc, #824]	@ (80023f8 <HAL_TIM_PeriodElapsedCallback+0xa5c>)
  80020be:	681b      	ldr	r3, [r3, #0]
  80020c0:	3338      	adds	r3, #56	@ 0x38
  80020c2:	001a      	movs	r2, r3
- 80020c4:	4bd1      	ldr	r3, [pc, #836]	@ (800240c <HAL_TIM_PeriodElapsedCallback+0xa70>)
+ 80020c4:	4bcd      	ldr	r3, [pc, #820]	@ (80023fc <HAL_TIM_PeriodElapsedCallback+0xa60>)
  80020c6:	681b      	ldr	r3, [r3, #0]
  80020c8:	429a      	cmp	r2, r3
  80020ca:	d115      	bne.n	80020f8 <HAL_TIM_PeriodElapsedCallback+0x75c>
 			dimNum = 13;
- 80020cc:	4bd0      	ldr	r3, [pc, #832]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
+ 80020cc:	4bcc      	ldr	r3, [pc, #816]	@ (8002400 <HAL_TIM_PeriodElapsedCallback+0xa64>)
  80020ce:	220d      	movs	r2, #13
  80020d0:	701a      	strb	r2, [r3, #0]
 			dimIndex = 0;
- 80020d2:	4bd0      	ldr	r3, [pc, #832]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
+ 80020d2:	4bcc      	ldr	r3, [pc, #816]	@ (8002404 <HAL_TIM_PeriodElapsedCallback+0xa68>)
  80020d4:	2200      	movs	r2, #0
  80020d6:	601a      	str	r2, [r3, #0]
 			HAL_TIM_Base_Stop_IT(timerDim);
- 80020d8:	4bcf      	ldr	r3, [pc, #828]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 80020d8:	4bcb      	ldr	r3, [pc, #812]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  80020da:	681b      	ldr	r3, [r3, #0]
  80020dc:	0018      	movs	r0, r3
  80020de:	f005 f84f 	bl	8007180 <HAL_TIM_Base_Stop_IT>
 			timerDim->Instance->CNT = 0;
- 80020e2:	4bcd      	ldr	r3, [pc, #820]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 80020e2:	4bc9      	ldr	r3, [pc, #804]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  80020e4:	681b      	ldr	r3, [r3, #0]
  80020e6:	681b      	ldr	r3, [r3, #0]
  80020e8:	2200      	movs	r2, #0
  80020ea:	625a      	str	r2, [r3, #36]	@ 0x24
 			HAL_TIM_Base_Start_IT(timerDim);
- 80020ec:	4bca      	ldr	r3, [pc, #808]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 80020ec:	4bc6      	ldr	r3, [pc, #792]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  80020ee:	681b      	ldr	r3, [r3, #0]
  80020f0:	0018      	movs	r0, r3
  80020f2:	f004 fff1 	bl	80070d8 <HAL_TIM_Base_Start_IT>
  80020f6:	e248      	b.n	800258a <HAL_TIM_PeriodElapsedCallback+0xbee>
 		}
 		else if (songIndex == timerChangeIndex[0] + 64) {
- 80020f8:	4bc3      	ldr	r3, [pc, #780]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
+ 80020f8:	4bbf      	ldr	r3, [pc, #764]	@ (80023f8 <HAL_TIM_PeriodElapsedCallback+0xa5c>)
  80020fa:	681b      	ldr	r3, [r3, #0]
  80020fc:	3340      	adds	r3, #64	@ 0x40
  80020fe:	001a      	movs	r2, r3
- 8002100:	4bc2      	ldr	r3, [pc, #776]	@ (800240c <HAL_TIM_PeriodElapsedCallback+0xa70>)
+ 8002100:	4bbe      	ldr	r3, [pc, #760]	@ (80023fc <HAL_TIM_PeriodElapsedCallback+0xa60>)
  8002102:	681b      	ldr	r3, [r3, #0]
  8002104:	429a      	cmp	r2, r3
  8002106:	d115      	bne.n	8002134 <HAL_TIM_PeriodElapsedCallback+0x798>
 			dimNum = 135;
- 8002108:	4bc1      	ldr	r3, [pc, #772]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
+ 8002108:	4bbd      	ldr	r3, [pc, #756]	@ (8002400 <HAL_TIM_PeriodElapsedCallback+0xa64>)
  800210a:	2287      	movs	r2, #135	@ 0x87
  800210c:	701a      	strb	r2, [r3, #0]
 			dimIndex = 0;
- 800210e:	4bc1      	ldr	r3, [pc, #772]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
+ 800210e:	4bbd      	ldr	r3, [pc, #756]	@ (8002404 <HAL_TIM_PeriodElapsedCallback+0xa68>)
  8002110:	2200      	movs	r2, #0
  8002112:	601a      	str	r2, [r3, #0]
 			HAL_TIM_Base_Stop_IT(timerDim);
- 8002114:	4bc0      	ldr	r3, [pc, #768]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 8002114:	4bbc      	ldr	r3, [pc, #752]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  8002116:	681b      	ldr	r3, [r3, #0]
  8002118:	0018      	movs	r0, r3
  800211a:	f005 f831 	bl	8007180 <HAL_TIM_Base_Stop_IT>
 			timerDim->Instance->CNT = 0;
- 800211e:	4bbe      	ldr	r3, [pc, #760]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 800211e:	4bba      	ldr	r3, [pc, #744]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  8002120:	681b      	ldr	r3, [r3, #0]
  8002122:	681b      	ldr	r3, [r3, #0]
  8002124:	2200      	movs	r2, #0
  8002126:	625a      	str	r2, [r3, #36]	@ 0x24
 			HAL_TIM_Base_Start_IT(timerDim);
- 8002128:	4bbb      	ldr	r3, [pc, #748]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 8002128:	4bb7      	ldr	r3, [pc, #732]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  800212a:	681b      	ldr	r3, [r3, #0]
  800212c:	0018      	movs	r0, r3
  800212e:	f004 ffd3 	bl	80070d8 <HAL_TIM_Base_Start_IT>
  8002132:	e22a      	b.n	800258a <HAL_TIM_PeriodElapsedCallback+0xbee>
 		}
 		else if (songIndex == timerChangeIndex[1]) {
- 8002134:	4bb4      	ldr	r3, [pc, #720]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
+ 8002134:	4bb0      	ldr	r3, [pc, #704]	@ (80023f8 <HAL_TIM_PeriodElapsedCallback+0xa5c>)
  8002136:	685a      	ldr	r2, [r3, #4]
- 8002138:	4bb4      	ldr	r3, [pc, #720]	@ (800240c <HAL_TIM_PeriodElapsedCallback+0xa70>)
+ 8002138:	4bb0      	ldr	r3, [pc, #704]	@ (80023fc <HAL_TIM_PeriodElapsedCallback+0xa60>)
  800213a:	681b      	ldr	r3, [r3, #0]
  800213c:	429a      	cmp	r2, r3
  800213e:	d11f      	bne.n	8002180 <HAL_TIM_PeriodElapsedCallback+0x7e4>
 			dimNum = 14;
- 8002140:	4bb3      	ldr	r3, [pc, #716]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
+ 8002140:	4baf      	ldr	r3, [pc, #700]	@ (8002400 <HAL_TIM_PeriodElapsedCallback+0xa64>)
  8002142:	220e      	movs	r2, #14
  8002144:	701a      	strb	r2, [r3, #0]
 			dimIndex = 0;
- 8002146:	4bb3      	ldr	r3, [pc, #716]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
+ 8002146:	4baf      	ldr	r3, [pc, #700]	@ (8002404 <HAL_TIM_PeriodElapsedCallback+0xa68>)
  8002148:	2200      	movs	r2, #0
  800214a:	601a      	str	r2, [r3, #0]
 			HAL_TIM_Base_Stop_IT(timerDim);
- 800214c:	4bb2      	ldr	r3, [pc, #712]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 800214c:	4bae      	ldr	r3, [pc, #696]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  800214e:	681b      	ldr	r3, [r3, #0]
  8002150:	0018      	movs	r0, r3
  8002152:	f005 f815 	bl	8007180 <HAL_TIM_Base_Stop_IT>
 			timerDim->Instance->PSC = 5-1;
- 8002156:	4bb0      	ldr	r3, [pc, #704]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 8002156:	4bac      	ldr	r3, [pc, #688]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  8002158:	681b      	ldr	r3, [r3, #0]
  800215a:	681b      	ldr	r3, [r3, #0]
  800215c:	2204      	movs	r2, #4
  800215e:	629a      	str	r2, [r3, #40]	@ 0x28
 			timerDim->Instance->ARR = 60000;
- 8002160:	4bad      	ldr	r3, [pc, #692]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 8002160:	4ba9      	ldr	r3, [pc, #676]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  8002162:	681b      	ldr	r3, [r3, #0]
  8002164:	681b      	ldr	r3, [r3, #0]
- 8002166:	4aad      	ldr	r2, [pc, #692]	@ (800241c <HAL_TIM_PeriodElapsedCallback+0xa80>)
+ 8002166:	4aa9      	ldr	r2, [pc, #676]	@ (800240c <HAL_TIM_PeriodElapsedCallback+0xa70>)
  8002168:	62da      	str	r2, [r3, #44]	@ 0x2c
 			timerDim->Instance->CNT = 0;
- 800216a:	4bab      	ldr	r3, [pc, #684]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 800216a:	4ba7      	ldr	r3, [pc, #668]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  800216c:	681b      	ldr	r3, [r3, #0]
  800216e:	681b      	ldr	r3, [r3, #0]
  8002170:	2200      	movs	r2, #0
  8002172:	625a      	str	r2, [r3, #36]	@ 0x24
 			HAL_TIM_Base_Start_IT(timerDim);
- 8002174:	4ba8      	ldr	r3, [pc, #672]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 8002174:	4ba4      	ldr	r3, [pc, #656]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  8002176:	681b      	ldr	r3, [r3, #0]
  8002178:	0018      	movs	r0, r3
  800217a:	f004 ffad 	bl	80070d8 <HAL_TIM_Base_Start_IT>
  800217e:	e204      	b.n	800258a <HAL_TIM_PeriodElapsedCallback+0xbee>
 		}
 		else if (songIndex == timerChangeIndex[1] + 16) {
- 8002180:	4ba1      	ldr	r3, [pc, #644]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
+ 8002180:	4b9d      	ldr	r3, [pc, #628]	@ (80023f8 <HAL_TIM_PeriodElapsedCallback+0xa5c>)
  8002182:	685b      	ldr	r3, [r3, #4]
  8002184:	3310      	adds	r3, #16
  8002186:	001a      	movs	r2, r3
- 8002188:	4ba0      	ldr	r3, [pc, #640]	@ (800240c <HAL_TIM_PeriodElapsedCallback+0xa70>)
+ 8002188:	4b9c      	ldr	r3, [pc, #624]	@ (80023fc <HAL_TIM_PeriodElapsedCallback+0xa60>)
  800218a:	681b      	ldr	r3, [r3, #0]
  800218c:	429a      	cmp	r2, r3
  800218e:	d115      	bne.n	80021bc <HAL_TIM_PeriodElapsedCallback+0x820>
 			dimNum = 15;
- 8002190:	4b9f      	ldr	r3, [pc, #636]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
+ 8002190:	4b9b      	ldr	r3, [pc, #620]	@ (8002400 <HAL_TIM_PeriodElapsedCallback+0xa64>)
  8002192:	220f      	movs	r2, #15
  8002194:	701a      	strb	r2, [r3, #0]
 			dimIndex = 0;
- 8002196:	4b9f      	ldr	r3, [pc, #636]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
+ 8002196:	4b9b      	ldr	r3, [pc, #620]	@ (8002404 <HAL_TIM_PeriodElapsedCallback+0xa68>)
  8002198:	2200      	movs	r2, #0
  800219a:	601a      	str	r2, [r3, #0]
 			HAL_TIM_Base_Stop_IT(timerDim);
- 800219c:	4b9e      	ldr	r3, [pc, #632]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 800219c:	4b9a      	ldr	r3, [pc, #616]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  800219e:	681b      	ldr	r3, [r3, #0]
  80021a0:	0018      	movs	r0, r3
  80021a2:	f004 ffed 	bl	8007180 <HAL_TIM_Base_Stop_IT>
 			timerDim->Instance->CNT = 0;
- 80021a6:	4b9c      	ldr	r3, [pc, #624]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 80021a6:	4b98      	ldr	r3, [pc, #608]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  80021a8:	681b      	ldr	r3, [r3, #0]
  80021aa:	681b      	ldr	r3, [r3, #0]
  80021ac:	2200      	movs	r2, #0
  80021ae:	625a      	str	r2, [r3, #36]	@ 0x24
 			HAL_TIM_Base_Start_IT(timerDim);
- 80021b0:	4b99      	ldr	r3, [pc, #612]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 80021b0:	4b95      	ldr	r3, [pc, #596]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  80021b2:	681b      	ldr	r3, [r3, #0]
  80021b4:	0018      	movs	r0, r3
  80021b6:	f004 ff8f 	bl	80070d8 <HAL_TIM_Base_Start_IT>
  80021ba:	e1e6      	b.n	800258a <HAL_TIM_PeriodElapsedCallback+0xbee>
 		}
 		else if (songIndex == timerChangeIndex[1] + 32) {
- 80021bc:	4b92      	ldr	r3, [pc, #584]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
+ 80021bc:	4b8e      	ldr	r3, [pc, #568]	@ (80023f8 <HAL_TIM_PeriodElapsedCallback+0xa5c>)
  80021be:	685b      	ldr	r3, [r3, #4]
  80021c0:	3320      	adds	r3, #32
  80021c2:	001a      	movs	r2, r3
- 80021c4:	4b91      	ldr	r3, [pc, #580]	@ (800240c <HAL_TIM_PeriodElapsedCallback+0xa70>)
+ 80021c4:	4b8d      	ldr	r3, [pc, #564]	@ (80023fc <HAL_TIM_PeriodElapsedCallback+0xa60>)
  80021c6:	681b      	ldr	r3, [r3, #0]
  80021c8:	429a      	cmp	r2, r3
  80021ca:	d115      	bne.n	80021f8 <HAL_TIM_PeriodElapsedCallback+0x85c>
 			dimNum = 16;
- 80021cc:	4b90      	ldr	r3, [pc, #576]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
+ 80021cc:	4b8c      	ldr	r3, [pc, #560]	@ (8002400 <HAL_TIM_PeriodElapsedCallback+0xa64>)
  80021ce:	2210      	movs	r2, #16
  80021d0:	701a      	strb	r2, [r3, #0]
 			dimIndex = 0;
- 80021d2:	4b90      	ldr	r3, [pc, #576]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
+ 80021d2:	4b8c      	ldr	r3, [pc, #560]	@ (8002404 <HAL_TIM_PeriodElapsedCallback+0xa68>)
  80021d4:	2200      	movs	r2, #0
  80021d6:	601a      	str	r2, [r3, #0]
 			HAL_TIM_Base_Stop_IT(timerDim);
- 80021d8:	4b8f      	ldr	r3, [pc, #572]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 80021d8:	4b8b      	ldr	r3, [pc, #556]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  80021da:	681b      	ldr	r3, [r3, #0]
  80021dc:	0018      	movs	r0, r3
  80021de:	f004 ffcf 	bl	8007180 <HAL_TIM_Base_Stop_IT>
 			timerDim->Instance->CNT = 0;
- 80021e2:	4b8d      	ldr	r3, [pc, #564]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 80021e2:	4b89      	ldr	r3, [pc, #548]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  80021e4:	681b      	ldr	r3, [r3, #0]
  80021e6:	681b      	ldr	r3, [r3, #0]
  80021e8:	2200      	movs	r2, #0
  80021ea:	625a      	str	r2, [r3, #36]	@ 0x24
 			HAL_TIM_Base_Start_IT(timerDim);
- 80021ec:	4b8a      	ldr	r3, [pc, #552]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 80021ec:	4b86      	ldr	r3, [pc, #536]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  80021ee:	681b      	ldr	r3, [r3, #0]
  80021f0:	0018      	movs	r0, r3
  80021f2:	f004 ff71 	bl	80070d8 <HAL_TIM_Base_Start_IT>
  80021f6:	e1c8      	b.n	800258a <HAL_TIM_PeriodElapsedCallback+0xbee>
 		}
 		else if (songIndex == timerChangeIndex[1] + 48) {
- 80021f8:	4b83      	ldr	r3, [pc, #524]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
+ 80021f8:	4b7f      	ldr	r3, [pc, #508]	@ (80023f8 <HAL_TIM_PeriodElapsedCallback+0xa5c>)
  80021fa:	685b      	ldr	r3, [r3, #4]
  80021fc:	3330      	adds	r3, #48	@ 0x30
  80021fe:	001a      	movs	r2, r3
- 8002200:	4b82      	ldr	r3, [pc, #520]	@ (800240c <HAL_TIM_PeriodElapsedCallback+0xa70>)
+ 8002200:	4b7e      	ldr	r3, [pc, #504]	@ (80023fc <HAL_TIM_PeriodElapsedCallback+0xa60>)
  8002202:	681b      	ldr	r3, [r3, #0]
  8002204:	429a      	cmp	r2, r3
  8002206:	d115      	bne.n	8002234 <HAL_TIM_PeriodElapsedCallback+0x898>
 			dimNum = 17;
- 8002208:	4b81      	ldr	r3, [pc, #516]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
+ 8002208:	4b7d      	ldr	r3, [pc, #500]	@ (8002400 <HAL_TIM_PeriodElapsedCallback+0xa64>)
  800220a:	2211      	movs	r2, #17
  800220c:	701a      	strb	r2, [r3, #0]
 			dimIndex = 0;
- 800220e:	4b81      	ldr	r3, [pc, #516]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
+ 800220e:	4b7d      	ldr	r3, [pc, #500]	@ (8002404 <HAL_TIM_PeriodElapsedCallback+0xa68>)
  8002210:	2200      	movs	r2, #0
  8002212:	601a      	str	r2, [r3, #0]
 			HAL_TIM_Base_Stop_IT(timerDim);
- 8002214:	4b80      	ldr	r3, [pc, #512]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 8002214:	4b7c      	ldr	r3, [pc, #496]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  8002216:	681b      	ldr	r3, [r3, #0]
  8002218:	0018      	movs	r0, r3
  800221a:	f004 ffb1 	bl	8007180 <HAL_TIM_Base_Stop_IT>
 			timerDim->Instance->CNT = 0;
- 800221e:	4b7e      	ldr	r3, [pc, #504]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 800221e:	4b7a      	ldr	r3, [pc, #488]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  8002220:	681b      	ldr	r3, [r3, #0]
  8002222:	681b      	ldr	r3, [r3, #0]
  8002224:	2200      	movs	r2, #0
  8002226:	625a      	str	r2, [r3, #36]	@ 0x24
 			HAL_TIM_Base_Start_IT(timerDim);
- 8002228:	4b7b      	ldr	r3, [pc, #492]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 8002228:	4b77      	ldr	r3, [pc, #476]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  800222a:	681b      	ldr	r3, [r3, #0]
  800222c:	0018      	movs	r0, r3
  800222e:	f004 ff53 	bl	80070d8 <HAL_TIM_Base_Start_IT>
  8002232:	e1aa      	b.n	800258a <HAL_TIM_PeriodElapsedCallback+0xbee>
 		}
 		else if (songIndex == timerChangeIndex[2]) {
- 8002234:	4b74      	ldr	r3, [pc, #464]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
+ 8002234:	4b70      	ldr	r3, [pc, #448]	@ (80023f8 <HAL_TIM_PeriodElapsedCallback+0xa5c>)
  8002236:	689a      	ldr	r2, [r3, #8]
- 8002238:	4b74      	ldr	r3, [pc, #464]	@ (800240c <HAL_TIM_PeriodElapsedCallback+0xa70>)
+ 8002238:	4b70      	ldr	r3, [pc, #448]	@ (80023fc <HAL_TIM_PeriodElapsedCallback+0xa60>)
  800223a:	681b      	ldr	r3, [r3, #0]
  800223c:	429a      	cmp	r2, r3
  800223e:	d14b      	bne.n	80022d8 <HAL_TIM_PeriodElapsedCallback+0x93c>
 			dimNum = 18;
- 8002240:	4b73      	ldr	r3, [pc, #460]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
+ 8002240:	4b6f      	ldr	r3, [pc, #444]	@ (8002400 <HAL_TIM_PeriodElapsedCallback+0xa64>)
  8002242:	2212      	movs	r2, #18
  8002244:	701a      	strb	r2, [r3, #0]
 			dimIndex = 0;
- 8002246:	4b73      	ldr	r3, [pc, #460]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
+ 8002246:	4b6f      	ldr	r3, [pc, #444]	@ (8002404 <HAL_TIM_PeriodElapsedCallback+0xa68>)
  8002248:	2200      	movs	r2, #0
  800224a:	601a      	str	r2, [r3, #0]
 
 			timerPWM[0]->Instance->ARR = 800;
- 800224c:	4b74      	ldr	r3, [pc, #464]	@ (8002420 <HAL_TIM_PeriodElapsedCallback+0xa84>)
+ 800224c:	4b70      	ldr	r3, [pc, #448]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
  800224e:	681b      	ldr	r3, [r3, #0]
  8002250:	681b      	ldr	r3, [r3, #0]
  8002252:	22c8      	movs	r2, #200	@ 0xc8
  8002254:	0092      	lsls	r2, r2, #2
  8002256:	62da      	str	r2, [r3, #44]	@ 0x2c
 			timerPWM[2]->Instance->ARR = 800;
- 8002258:	4b71      	ldr	r3, [pc, #452]	@ (8002420 <HAL_TIM_PeriodElapsedCallback+0xa84>)
+ 8002258:	4b6d      	ldr	r3, [pc, #436]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
  800225a:	689b      	ldr	r3, [r3, #8]
  800225c:	681b      	ldr	r3, [r3, #0]
  800225e:	22c8      	movs	r2, #200	@ 0xc8
  8002260:	0092      	lsls	r2, r2, #2
  8002262:	62da      	str	r2, [r3, #44]	@ 0x2c
 			HAL_TIM_PWM_Start(timerPWM[0], PWMChannels[0]);
- 8002264:	4b6e      	ldr	r3, [pc, #440]	@ (8002420 <HAL_TIM_PeriodElapsedCallback+0xa84>)
+ 8002264:	4b6a      	ldr	r3, [pc, #424]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
  8002266:	681a      	ldr	r2, [r3, #0]
- 8002268:	4b6e      	ldr	r3, [pc, #440]	@ (8002424 <HAL_TIM_PeriodElapsedCallback+0xa88>)
+ 8002268:	4b6a      	ldr	r3, [pc, #424]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
  800226a:	681b      	ldr	r3, [r3, #0]
  800226c:	0019      	movs	r1, r3
  800226e:	0010      	movs	r0, r2
  8002270:	f005 f80c 	bl	800728c <HAL_TIM_PWM_Start>
 			HAL_TIM_PWM_Start(timerPWM[1], PWMChannels[1]);
- 8002274:	4b6a      	ldr	r3, [pc, #424]	@ (8002420 <HAL_TIM_PeriodElapsedCallback+0xa84>)
+ 8002274:	4b66      	ldr	r3, [pc, #408]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
  8002276:	685a      	ldr	r2, [r3, #4]
- 8002278:	4b6a      	ldr	r3, [pc, #424]	@ (8002424 <HAL_TIM_PeriodElapsedCallback+0xa88>)
+ 8002278:	4b66      	ldr	r3, [pc, #408]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
  800227a:	685b      	ldr	r3, [r3, #4]
  800227c:	0019      	movs	r1, r3
  800227e:	0010      	movs	r0, r2
  8002280:	f005 f804 	bl	800728c <HAL_TIM_PWM_Start>
 			HAL_TIM_PWM_Start(timerPWM[2], PWMChannels[2]);
- 8002284:	4b66      	ldr	r3, [pc, #408]	@ (8002420 <HAL_TIM_PeriodElapsedCallback+0xa84>)
+ 8002284:	4b62      	ldr	r3, [pc, #392]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
  8002286:	689a      	ldr	r2, [r3, #8]
- 8002288:	4b66      	ldr	r3, [pc, #408]	@ (8002424 <HAL_TIM_PeriodElapsedCallback+0xa88>)
+ 8002288:	4b62      	ldr	r3, [pc, #392]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
  800228a:	689b      	ldr	r3, [r3, #8]
  800228c:	0019      	movs	r1, r3
  800228e:	0010      	movs	r0, r2
  8002290:	f004 fffc 	bl	800728c <HAL_TIM_PWM_Start>
 			HAL_TIM_PWM_Start(timerPWM[3], PWMChannels[3]);
- 8002294:	4b62      	ldr	r3, [pc, #392]	@ (8002420 <HAL_TIM_PeriodElapsedCallback+0xa84>)
+ 8002294:	4b5e      	ldr	r3, [pc, #376]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
  8002296:	68da      	ldr	r2, [r3, #12]
- 8002298:	4b62      	ldr	r3, [pc, #392]	@ (8002424 <HAL_TIM_PeriodElapsedCallback+0xa88>)
+ 8002298:	4b5e      	ldr	r3, [pc, #376]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
  800229a:	68db      	ldr	r3, [r3, #12]
  800229c:	0019      	movs	r1, r3
  800229e:	0010      	movs	r0, r2
  80022a0:	f004 fff4 	bl	800728c <HAL_TIM_PWM_Start>
 
 			HAL_TIM_Base_Stop_IT(timerDim);
- 80022a4:	4b5c      	ldr	r3, [pc, #368]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 80022a4:	4b58      	ldr	r3, [pc, #352]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  80022a6:	681b      	ldr	r3, [r3, #0]
  80022a8:	0018      	movs	r0, r3
  80022aa:	f004 ff69 	bl	8007180 <HAL_TIM_Base_Stop_IT>
 			timerDim->Instance->PSC = 5-1;
- 80022ae:	4b5a      	ldr	r3, [pc, #360]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 80022ae:	4b56      	ldr	r3, [pc, #344]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  80022b0:	681b      	ldr	r3, [r3, #0]
  80022b2:	681b      	ldr	r3, [r3, #0]
  80022b4:	2204      	movs	r2, #4
  80022b6:	629a      	str	r2, [r3, #40]	@ 0x28
 			timerDim->Instance->ARR = 60000;
- 80022b8:	4b57      	ldr	r3, [pc, #348]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 80022b8:	4b53      	ldr	r3, [pc, #332]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  80022ba:	681b      	ldr	r3, [r3, #0]
  80022bc:	681b      	ldr	r3, [r3, #0]
- 80022be:	4a57      	ldr	r2, [pc, #348]	@ (800241c <HAL_TIM_PeriodElapsedCallback+0xa80>)
+ 80022be:	4a53      	ldr	r2, [pc, #332]	@ (800240c <HAL_TIM_PeriodElapsedCallback+0xa70>)
  80022c0:	62da      	str	r2, [r3, #44]	@ 0x2c
 			timerDim->Instance->CNT = 0;
- 80022c2:	4b55      	ldr	r3, [pc, #340]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 80022c2:	4b51      	ldr	r3, [pc, #324]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  80022c4:	681b      	ldr	r3, [r3, #0]
  80022c6:	681b      	ldr	r3, [r3, #0]
  80022c8:	2200      	movs	r2, #0
  80022ca:	625a      	str	r2, [r3, #36]	@ 0x24
 			HAL_TIM_Base_Start_IT(timerDim);
- 80022cc:	4b52      	ldr	r3, [pc, #328]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 80022cc:	4b4e      	ldr	r3, [pc, #312]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
  80022ce:	681b      	ldr	r3, [r3, #0]
  80022d0:	0018      	movs	r0, r3
  80022d2:	f004 ff01 	bl	80070d8 <HAL_TIM_Base_Start_IT>
  80022d6:	e158      	b.n	800258a <HAL_TIM_PeriodElapsedCallback+0xbee>
 		}
-		else if (songIndex == timerChangeIndex[2] + 64) {
- 80022d8:	4b4b      	ldr	r3, [pc, #300]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
+		else if (songIndex == timerChangeIndex[2] + 53) {
+ 80022d8:	4b47      	ldr	r3, [pc, #284]	@ (80023f8 <HAL_TIM_PeriodElapsedCallback+0xa5c>)
  80022da:	689b      	ldr	r3, [r3, #8]
- 80022dc:	3340      	adds	r3, #64	@ 0x40
+ 80022dc:	3335      	adds	r3, #53	@ 0x35
  80022de:	001a      	movs	r2, r3
- 80022e0:	4b4a      	ldr	r3, [pc, #296]	@ (800240c <HAL_TIM_PeriodElapsedCallback+0xa70>)
+ 80022e0:	4b46      	ldr	r3, [pc, #280]	@ (80023fc <HAL_TIM_PeriodElapsedCallback+0xa60>)
  80022e2:	681b      	ldr	r3, [r3, #0]
  80022e4:	429a      	cmp	r2, r3
  80022e6:	d000      	beq.n	80022ea <HAL_TIM_PeriodElapsedCallback+0x94e>
  80022e8:	e14f      	b.n	800258a <HAL_TIM_PeriodElapsedCallback+0xbee>
+
+			HAL_TIM_Base_Stop_IT(timerDim);
+ 80022ea:	4b47      	ldr	r3, [pc, #284]	@ (8002408 <HAL_TIM_PeriodElapsedCallback+0xa6c>)
+ 80022ec:	681b      	ldr	r3, [r3, #0]
+ 80022ee:	0018      	movs	r0, r3
+ 80022f0:	f004 ff46 	bl	8007180 <HAL_TIM_Base_Stop_IT>
+
 			dimNum = 19;
- 80022ea:	4b49      	ldr	r3, [pc, #292]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
- 80022ec:	2213      	movs	r2, #19
- 80022ee:	701a      	strb	r2, [r3, #0]
+ 80022f4:	4b42      	ldr	r3, [pc, #264]	@ (8002400 <HAL_TIM_PeriodElapsedCallback+0xa64>)
+ 80022f6:	2213      	movs	r2, #19
+ 80022f8:	701a      	strb	r2, [r3, #0]
 			dimIndex = 0;
- 80022f0:	4b48      	ldr	r3, [pc, #288]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
- 80022f2:	2200      	movs	r2, #0
- 80022f4:	601a      	str	r2, [r3, #0]
+ 80022fa:	4b42      	ldr	r3, [pc, #264]	@ (8002404 <HAL_TIM_PeriodElapsedCallback+0xa68>)
+ 80022fc:	2200      	movs	r2, #0
+ 80022fe:	601a      	str	r2, [r3, #0]
 
 			timerPWM[0]->Instance->ARR = 100;
- 80022f6:	4b4a      	ldr	r3, [pc, #296]	@ (8002420 <HAL_TIM_PeriodElapsedCallback+0xa84>)
- 80022f8:	681b      	ldr	r3, [r3, #0]
- 80022fa:	681b      	ldr	r3, [r3, #0]
- 80022fc:	2264      	movs	r2, #100	@ 0x64
- 80022fe:	62da      	str	r2, [r3, #44]	@ 0x2c
-			timerPWM[2]->Instance->ARR = 100;
- 8002300:	4b47      	ldr	r3, [pc, #284]	@ (8002420 <HAL_TIM_PeriodElapsedCallback+0xa84>)
- 8002302:	689b      	ldr	r3, [r3, #8]
+ 8002300:	4b43      	ldr	r3, [pc, #268]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
+ 8002302:	681b      	ldr	r3, [r3, #0]
  8002304:	681b      	ldr	r3, [r3, #0]
  8002306:	2264      	movs	r2, #100	@ 0x64
  8002308:	62da      	str	r2, [r3, #44]	@ 0x2c
-			HAL_TIM_PWM_Start(timerPWM[0], PWMChannels[0]);
- 800230a:	4b45      	ldr	r3, [pc, #276]	@ (8002420 <HAL_TIM_PeriodElapsedCallback+0xa84>)
- 800230c:	681a      	ldr	r2, [r3, #0]
- 800230e:	4b45      	ldr	r3, [pc, #276]	@ (8002424 <HAL_TIM_PeriodElapsedCallback+0xa88>)
- 8002310:	681b      	ldr	r3, [r3, #0]
- 8002312:	0019      	movs	r1, r3
- 8002314:	0010      	movs	r0, r2
- 8002316:	f004 ffb9 	bl	800728c <HAL_TIM_PWM_Start>
-			HAL_TIM_PWM_Start(timerPWM[1], PWMChannels[1]);
- 800231a:	4b41      	ldr	r3, [pc, #260]	@ (8002420 <HAL_TIM_PeriodElapsedCallback+0xa84>)
- 800231c:	685a      	ldr	r2, [r3, #4]
- 800231e:	4b41      	ldr	r3, [pc, #260]	@ (8002424 <HAL_TIM_PeriodElapsedCallback+0xa88>)
- 8002320:	685b      	ldr	r3, [r3, #4]
- 8002322:	0019      	movs	r1, r3
- 8002324:	0010      	movs	r0, r2
- 8002326:	f004 ffb1 	bl	800728c <HAL_TIM_PWM_Start>
-			HAL_TIM_PWM_Start(timerPWM[2], PWMChannels[2]);
- 800232a:	4b3d      	ldr	r3, [pc, #244]	@ (8002420 <HAL_TIM_PeriodElapsedCallback+0xa84>)
- 800232c:	689a      	ldr	r2, [r3, #8]
- 800232e:	4b3d      	ldr	r3, [pc, #244]	@ (8002424 <HAL_TIM_PeriodElapsedCallback+0xa88>)
- 8002330:	689b      	ldr	r3, [r3, #8]
- 8002332:	0019      	movs	r1, r3
- 8002334:	0010      	movs	r0, r2
- 8002336:	f004 ffa9 	bl	800728c <HAL_TIM_PWM_Start>
-			HAL_TIM_PWM_Start(timerPWM[3], PWMChannels[3]);
- 800233a:	4b39      	ldr	r3, [pc, #228]	@ (8002420 <HAL_TIM_PeriodElapsedCallback+0xa84>)
- 800233c:	68da      	ldr	r2, [r3, #12]
- 800233e:	4b39      	ldr	r3, [pc, #228]	@ (8002424 <HAL_TIM_PeriodElapsedCallback+0xa88>)
- 8002340:	68db      	ldr	r3, [r3, #12]
- 8002342:	0019      	movs	r1, r3
- 8002344:	0010      	movs	r0, r2
- 8002346:	f004 ffa1 	bl	800728c <HAL_TIM_PWM_Start>
-
-			HAL_TIM_Base_Stop_IT(timerDim);
- 800234a:	4b33      	ldr	r3, [pc, #204]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
- 800234c:	681b      	ldr	r3, [r3, #0]
- 800234e:	0018      	movs	r0, r3
- 8002350:	f004 ff16 	bl	8007180 <HAL_TIM_Base_Stop_IT>
-
+			timerPWM[2]->Instance->ARR = 100;
+ 800230a:	4b41      	ldr	r3, [pc, #260]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
+ 800230c:	689b      	ldr	r3, [r3, #8]
+ 800230e:	681b      	ldr	r3, [r3, #0]
+ 8002310:	2264      	movs	r2, #100	@ 0x64
+ 8002312:	62da      	str	r2, [r3, #44]	@ 0x2c
 			__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], systemPWM);
- 8002354:	4b33      	ldr	r3, [pc, #204]	@ (8002424 <HAL_TIM_PeriodElapsedCallback+0xa88>)
- 8002356:	681b      	ldr	r3, [r3, #0]
- 8002358:	2b00      	cmp	r3, #0
- 800235a:	d106      	bne.n	800236a <HAL_TIM_PeriodElapsedCallback+0x9ce>
- 800235c:	4b32      	ldr	r3, [pc, #200]	@ (8002428 <HAL_TIM_PeriodElapsedCallback+0xa8c>)
- 800235e:	781a      	ldrb	r2, [r3, #0]
- 8002360:	4b2f      	ldr	r3, [pc, #188]	@ (8002420 <HAL_TIM_PeriodElapsedCallback+0xa84>)
- 8002362:	681b      	ldr	r3, [r3, #0]
- 8002364:	681b      	ldr	r3, [r3, #0]
- 8002366:	635a      	str	r2, [r3, #52]	@ 0x34
- 8002368:	e036      	b.n	80023d8 <HAL_TIM_PeriodElapsedCallback+0xa3c>
- 800236a:	4b2e      	ldr	r3, [pc, #184]	@ (8002424 <HAL_TIM_PeriodElapsedCallback+0xa88>)
- 800236c:	681b      	ldr	r3, [r3, #0]
- 800236e:	2b04      	cmp	r3, #4
- 8002370:	d107      	bne.n	8002382 <HAL_TIM_PeriodElapsedCallback+0x9e6>
- 8002372:	4b2d      	ldr	r3, [pc, #180]	@ (8002428 <HAL_TIM_PeriodElapsedCallback+0xa8c>)
- 8002374:	7819      	ldrb	r1, [r3, #0]
- 8002376:	4b2a      	ldr	r3, [pc, #168]	@ (8002420 <HAL_TIM_PeriodElapsedCallback+0xa84>)
- 8002378:	681b      	ldr	r3, [r3, #0]
- 800237a:	681a      	ldr	r2, [r3, #0]
- 800237c:	000b      	movs	r3, r1
- 800237e:	6393      	str	r3, [r2, #56]	@ 0x38
- 8002380:	e02a      	b.n	80023d8 <HAL_TIM_PeriodElapsedCallback+0xa3c>
- 8002382:	4b28      	ldr	r3, [pc, #160]	@ (8002424 <HAL_TIM_PeriodElapsedCallback+0xa88>)
- 8002384:	681b      	ldr	r3, [r3, #0]
- 8002386:	2b08      	cmp	r3, #8
- 8002388:	d107      	bne.n	800239a <HAL_TIM_PeriodElapsedCallback+0x9fe>
- 800238a:	4b27      	ldr	r3, [pc, #156]	@ (8002428 <HAL_TIM_PeriodElapsedCallback+0xa8c>)
+ 8002314:	4b3f      	ldr	r3, [pc, #252]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
+ 8002316:	681b      	ldr	r3, [r3, #0]
+ 8002318:	2b00      	cmp	r3, #0
+ 800231a:	d106      	bne.n	800232a <HAL_TIM_PeriodElapsedCallback+0x98e>
+ 800231c:	4b3e      	ldr	r3, [pc, #248]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 800231e:	781a      	ldrb	r2, [r3, #0]
+ 8002320:	4b3b      	ldr	r3, [pc, #236]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
+ 8002322:	681b      	ldr	r3, [r3, #0]
+ 8002324:	681b      	ldr	r3, [r3, #0]
+ 8002326:	635a      	str	r2, [r3, #52]	@ 0x34
+ 8002328:	e036      	b.n	8002398 <HAL_TIM_PeriodElapsedCallback+0x9fc>
+ 800232a:	4b3a      	ldr	r3, [pc, #232]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
+ 800232c:	681b      	ldr	r3, [r3, #0]
+ 800232e:	2b04      	cmp	r3, #4
+ 8002330:	d107      	bne.n	8002342 <HAL_TIM_PeriodElapsedCallback+0x9a6>
+ 8002332:	4b39      	ldr	r3, [pc, #228]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 8002334:	7819      	ldrb	r1, [r3, #0]
+ 8002336:	4b36      	ldr	r3, [pc, #216]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
+ 8002338:	681b      	ldr	r3, [r3, #0]
+ 800233a:	681a      	ldr	r2, [r3, #0]
+ 800233c:	000b      	movs	r3, r1
+ 800233e:	6393      	str	r3, [r2, #56]	@ 0x38
+ 8002340:	e02a      	b.n	8002398 <HAL_TIM_PeriodElapsedCallback+0x9fc>
+ 8002342:	4b34      	ldr	r3, [pc, #208]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
+ 8002344:	681b      	ldr	r3, [r3, #0]
+ 8002346:	2b08      	cmp	r3, #8
+ 8002348:	d107      	bne.n	800235a <HAL_TIM_PeriodElapsedCallback+0x9be>
+ 800234a:	4b33      	ldr	r3, [pc, #204]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 800234c:	7819      	ldrb	r1, [r3, #0]
+ 800234e:	4b30      	ldr	r3, [pc, #192]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
+ 8002350:	681b      	ldr	r3, [r3, #0]
+ 8002352:	681a      	ldr	r2, [r3, #0]
+ 8002354:	000b      	movs	r3, r1
+ 8002356:	63d3      	str	r3, [r2, #60]	@ 0x3c
+ 8002358:	e01e      	b.n	8002398 <HAL_TIM_PeriodElapsedCallback+0x9fc>
+ 800235a:	4b2e      	ldr	r3, [pc, #184]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
+ 800235c:	681b      	ldr	r3, [r3, #0]
+ 800235e:	2b0c      	cmp	r3, #12
+ 8002360:	d107      	bne.n	8002372 <HAL_TIM_PeriodElapsedCallback+0x9d6>
+ 8002362:	4b2d      	ldr	r3, [pc, #180]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 8002364:	7819      	ldrb	r1, [r3, #0]
+ 8002366:	4b2a      	ldr	r3, [pc, #168]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
+ 8002368:	681b      	ldr	r3, [r3, #0]
+ 800236a:	681a      	ldr	r2, [r3, #0]
+ 800236c:	000b      	movs	r3, r1
+ 800236e:	6413      	str	r3, [r2, #64]	@ 0x40
+ 8002370:	e012      	b.n	8002398 <HAL_TIM_PeriodElapsedCallback+0x9fc>
+ 8002372:	4b28      	ldr	r3, [pc, #160]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
+ 8002374:	681b      	ldr	r3, [r3, #0]
+ 8002376:	2b10      	cmp	r3, #16
+ 8002378:	d107      	bne.n	800238a <HAL_TIM_PeriodElapsedCallback+0x9ee>
+ 800237a:	4b27      	ldr	r3, [pc, #156]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 800237c:	7819      	ldrb	r1, [r3, #0]
+ 800237e:	4b24      	ldr	r3, [pc, #144]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
+ 8002380:	681b      	ldr	r3, [r3, #0]
+ 8002382:	681a      	ldr	r2, [r3, #0]
+ 8002384:	000b      	movs	r3, r1
+ 8002386:	6593      	str	r3, [r2, #88]	@ 0x58
+ 8002388:	e006      	b.n	8002398 <HAL_TIM_PeriodElapsedCallback+0x9fc>
+ 800238a:	4b23      	ldr	r3, [pc, #140]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
  800238c:	7819      	ldrb	r1, [r3, #0]
- 800238e:	4b24      	ldr	r3, [pc, #144]	@ (8002420 <HAL_TIM_PeriodElapsedCallback+0xa84>)
+ 800238e:	4b20      	ldr	r3, [pc, #128]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
  8002390:	681b      	ldr	r3, [r3, #0]
  8002392:	681a      	ldr	r2, [r3, #0]
  8002394:	000b      	movs	r3, r1
- 8002396:	63d3      	str	r3, [r2, #60]	@ 0x3c
- 8002398:	e01e      	b.n	80023d8 <HAL_TIM_PeriodElapsedCallback+0xa3c>
- 800239a:	4b22      	ldr	r3, [pc, #136]	@ (8002424 <HAL_TIM_PeriodElapsedCallback+0xa88>)
- 800239c:	681b      	ldr	r3, [r3, #0]
- 800239e:	2b0c      	cmp	r3, #12
- 80023a0:	d107      	bne.n	80023b2 <HAL_TIM_PeriodElapsedCallback+0xa16>
- 80023a2:	4b21      	ldr	r3, [pc, #132]	@ (8002428 <HAL_TIM_PeriodElapsedCallback+0xa8c>)
- 80023a4:	7819      	ldrb	r1, [r3, #0]
- 80023a6:	4b1e      	ldr	r3, [pc, #120]	@ (8002420 <HAL_TIM_PeriodElapsedCallback+0xa84>)
- 80023a8:	681b      	ldr	r3, [r3, #0]
- 80023aa:	681a      	ldr	r2, [r3, #0]
- 80023ac:	000b      	movs	r3, r1
- 80023ae:	6413      	str	r3, [r2, #64]	@ 0x40
- 80023b0:	e012      	b.n	80023d8 <HAL_TIM_PeriodElapsedCallback+0xa3c>
- 80023b2:	4b1c      	ldr	r3, [pc, #112]	@ (8002424 <HAL_TIM_PeriodElapsedCallback+0xa88>)
- 80023b4:	681b      	ldr	r3, [r3, #0]
- 80023b6:	2b10      	cmp	r3, #16
- 80023b8:	d107      	bne.n	80023ca <HAL_TIM_PeriodElapsedCallback+0xa2e>
- 80023ba:	4b1b      	ldr	r3, [pc, #108]	@ (8002428 <HAL_TIM_PeriodElapsedCallback+0xa8c>)
- 80023bc:	7819      	ldrb	r1, [r3, #0]
- 80023be:	4b18      	ldr	r3, [pc, #96]	@ (8002420 <HAL_TIM_PeriodElapsedCallback+0xa84>)
- 80023c0:	681b      	ldr	r3, [r3, #0]
- 80023c2:	681a      	ldr	r2, [r3, #0]
- 80023c4:	000b      	movs	r3, r1
- 80023c6:	6593      	str	r3, [r2, #88]	@ 0x58
- 80023c8:	e006      	b.n	80023d8 <HAL_TIM_PeriodElapsedCallback+0xa3c>
- 80023ca:	4b17      	ldr	r3, [pc, #92]	@ (8002428 <HAL_TIM_PeriodElapsedCallback+0xa8c>)
- 80023cc:	7819      	ldrb	r1, [r3, #0]
- 80023ce:	4b14      	ldr	r3, [pc, #80]	@ (8002420 <HAL_TIM_PeriodElapsedCallback+0xa84>)
- 80023d0:	681b      	ldr	r3, [r3, #0]
- 80023d2:	681a      	ldr	r2, [r3, #0]
- 80023d4:	000b      	movs	r3, r1
- 80023d6:	65d3      	str	r3, [r2, #92]	@ 0x5c
+ 8002396:	65d3      	str	r3, [r2, #92]	@ 0x5c
 			__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], systemPWM);
- 80023d8:	4b12      	ldr	r3, [pc, #72]	@ (8002424 <HAL_TIM_PeriodElapsedCallback+0xa88>)
- 80023da:	685b      	ldr	r3, [r3, #4]
- 80023dc:	2b00      	cmp	r3, #0
- 80023de:	d106      	bne.n	80023ee <HAL_TIM_PeriodElapsedCallback+0xa52>
- 80023e0:	4b11      	ldr	r3, [pc, #68]	@ (8002428 <HAL_TIM_PeriodElapsedCallback+0xa8c>)
- 80023e2:	781a      	ldrb	r2, [r3, #0]
- 80023e4:	4b0e      	ldr	r3, [pc, #56]	@ (8002420 <HAL_TIM_PeriodElapsedCallback+0xa84>)
- 80023e6:	685b      	ldr	r3, [r3, #4]
- 80023e8:	681b      	ldr	r3, [r3, #0]
- 80023ea:	635a      	str	r2, [r3, #52]	@ 0x34
- 80023ec:	e049      	b.n	8002482 <HAL_TIM_PeriodElapsedCallback+0xae6>
- 80023ee:	4b0d      	ldr	r3, [pc, #52]	@ (8002424 <HAL_TIM_PeriodElapsedCallback+0xa88>)
- 80023f0:	685b      	ldr	r3, [r3, #4]
- 80023f2:	2b04      	cmp	r3, #4
- 80023f4:	d11a      	bne.n	800242c <HAL_TIM_PeriodElapsedCallback+0xa90>
- 80023f6:	4b0c      	ldr	r3, [pc, #48]	@ (8002428 <HAL_TIM_PeriodElapsedCallback+0xa8c>)
- 80023f8:	7819      	ldrb	r1, [r3, #0]
- 80023fa:	4b09      	ldr	r3, [pc, #36]	@ (8002420 <HAL_TIM_PeriodElapsedCallback+0xa84>)
- 80023fc:	685b      	ldr	r3, [r3, #4]
- 80023fe:	681a      	ldr	r2, [r3, #0]
- 8002400:	000b      	movs	r3, r1
- 8002402:	6393      	str	r3, [r2, #56]	@ 0x38
- 8002404:	e03d      	b.n	8002482 <HAL_TIM_PeriodElapsedCallback+0xae6>
- 8002406:	46c0      	nop			@ (mov r8, r8)
- 8002408:	20000054 	.word	0x20000054
- 800240c:	20000484 	.word	0x20000484
- 8002410:	2000048c 	.word	0x2000048c
- 8002414:	20000488 	.word	0x20000488
- 8002418:	2000004c 	.word	0x2000004c
- 800241c:	0000ea60 	.word	0x0000ea60
- 8002420:	20000038 	.word	0x20000038
- 8002424:	20000028 	.word	0x20000028
- 8002428:	20000051 	.word	0x20000051
- 800242c:	4bce      	ldr	r3, [pc, #824]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
- 800242e:	685b      	ldr	r3, [r3, #4]
- 8002430:	2b08      	cmp	r3, #8
- 8002432:	d107      	bne.n	8002444 <HAL_TIM_PeriodElapsedCallback+0xaa8>
+ 8002398:	4b1e      	ldr	r3, [pc, #120]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
+ 800239a:	685b      	ldr	r3, [r3, #4]
+ 800239c:	2b00      	cmp	r3, #0
+ 800239e:	d106      	bne.n	80023ae <HAL_TIM_PeriodElapsedCallback+0xa12>
+ 80023a0:	4b1d      	ldr	r3, [pc, #116]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 80023a2:	781a      	ldrb	r2, [r3, #0]
+ 80023a4:	4b1a      	ldr	r3, [pc, #104]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
+ 80023a6:	685b      	ldr	r3, [r3, #4]
+ 80023a8:	681b      	ldr	r3, [r3, #0]
+ 80023aa:	635a      	str	r2, [r3, #52]	@ 0x34
+ 80023ac:	e049      	b.n	8002442 <HAL_TIM_PeriodElapsedCallback+0xaa6>
+ 80023ae:	4b19      	ldr	r3, [pc, #100]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
+ 80023b0:	685b      	ldr	r3, [r3, #4]
+ 80023b2:	2b04      	cmp	r3, #4
+ 80023b4:	d107      	bne.n	80023c6 <HAL_TIM_PeriodElapsedCallback+0xa2a>
+ 80023b6:	4b18      	ldr	r3, [pc, #96]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 80023b8:	7819      	ldrb	r1, [r3, #0]
+ 80023ba:	4b15      	ldr	r3, [pc, #84]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
+ 80023bc:	685b      	ldr	r3, [r3, #4]
+ 80023be:	681a      	ldr	r2, [r3, #0]
+ 80023c0:	000b      	movs	r3, r1
+ 80023c2:	6393      	str	r3, [r2, #56]	@ 0x38
+ 80023c4:	e03d      	b.n	8002442 <HAL_TIM_PeriodElapsedCallback+0xaa6>
+ 80023c6:	4b13      	ldr	r3, [pc, #76]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
+ 80023c8:	685b      	ldr	r3, [r3, #4]
+ 80023ca:	2b08      	cmp	r3, #8
+ 80023cc:	d107      	bne.n	80023de <HAL_TIM_PeriodElapsedCallback+0xa42>
+ 80023ce:	4b12      	ldr	r3, [pc, #72]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 80023d0:	7819      	ldrb	r1, [r3, #0]
+ 80023d2:	4b0f      	ldr	r3, [pc, #60]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
+ 80023d4:	685b      	ldr	r3, [r3, #4]
+ 80023d6:	681a      	ldr	r2, [r3, #0]
+ 80023d8:	000b      	movs	r3, r1
+ 80023da:	63d3      	str	r3, [r2, #60]	@ 0x3c
+ 80023dc:	e031      	b.n	8002442 <HAL_TIM_PeriodElapsedCallback+0xaa6>
+ 80023de:	4b0d      	ldr	r3, [pc, #52]	@ (8002414 <HAL_TIM_PeriodElapsedCallback+0xa78>)
+ 80023e0:	685b      	ldr	r3, [r3, #4]
+ 80023e2:	2b0c      	cmp	r3, #12
+ 80023e4:	d11a      	bne.n	800241c <HAL_TIM_PeriodElapsedCallback+0xa80>
+ 80023e6:	4b0c      	ldr	r3, [pc, #48]	@ (8002418 <HAL_TIM_PeriodElapsedCallback+0xa7c>)
+ 80023e8:	7819      	ldrb	r1, [r3, #0]
+ 80023ea:	4b09      	ldr	r3, [pc, #36]	@ (8002410 <HAL_TIM_PeriodElapsedCallback+0xa74>)
+ 80023ec:	685b      	ldr	r3, [r3, #4]
+ 80023ee:	681a      	ldr	r2, [r3, #0]
+ 80023f0:	000b      	movs	r3, r1
+ 80023f2:	6413      	str	r3, [r2, #64]	@ 0x40
+ 80023f4:	e025      	b.n	8002442 <HAL_TIM_PeriodElapsedCallback+0xaa6>
+ 80023f6:	46c0      	nop			@ (mov r8, r8)
+ 80023f8:	20000054 	.word	0x20000054
+ 80023fc:	20000484 	.word	0x20000484
+ 8002400:	2000048c 	.word	0x2000048c
+ 8002404:	20000488 	.word	0x20000488
+ 8002408:	2000004c 	.word	0x2000004c
+ 800240c:	0000ea60 	.word	0x0000ea60
+ 8002410:	20000038 	.word	0x20000038
+ 8002414:	20000028 	.word	0x20000028
+ 8002418:	20000051 	.word	0x20000051
+ 800241c:	4bd2      	ldr	r3, [pc, #840]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
+ 800241e:	685b      	ldr	r3, [r3, #4]
+ 8002420:	2b10      	cmp	r3, #16
+ 8002422:	d107      	bne.n	8002434 <HAL_TIM_PeriodElapsedCallback+0xa98>
+ 8002424:	4bd1      	ldr	r3, [pc, #836]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
+ 8002426:	7819      	ldrb	r1, [r3, #0]
+ 8002428:	4bd1      	ldr	r3, [pc, #836]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
+ 800242a:	685b      	ldr	r3, [r3, #4]
+ 800242c:	681a      	ldr	r2, [r3, #0]
+ 800242e:	000b      	movs	r3, r1
+ 8002430:	6593      	str	r3, [r2, #88]	@ 0x58
+ 8002432:	e006      	b.n	8002442 <HAL_TIM_PeriodElapsedCallback+0xaa6>
  8002434:	4bcd      	ldr	r3, [pc, #820]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
  8002436:	7819      	ldrb	r1, [r3, #0]
  8002438:	4bcd      	ldr	r3, [pc, #820]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
  800243a:	685b      	ldr	r3, [r3, #4]
  800243c:	681a      	ldr	r2, [r3, #0]
  800243e:	000b      	movs	r3, r1
- 8002440:	63d3      	str	r3, [r2, #60]	@ 0x3c
- 8002442:	e01e      	b.n	8002482 <HAL_TIM_PeriodElapsedCallback+0xae6>
- 8002444:	4bc8      	ldr	r3, [pc, #800]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
- 8002446:	685b      	ldr	r3, [r3, #4]
- 8002448:	2b0c      	cmp	r3, #12
- 800244a:	d107      	bne.n	800245c <HAL_TIM_PeriodElapsedCallback+0xac0>
- 800244c:	4bc7      	ldr	r3, [pc, #796]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
- 800244e:	7819      	ldrb	r1, [r3, #0]
- 8002450:	4bc7      	ldr	r3, [pc, #796]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
- 8002452:	685b      	ldr	r3, [r3, #4]
- 8002454:	681a      	ldr	r2, [r3, #0]
- 8002456:	000b      	movs	r3, r1
- 8002458:	6413      	str	r3, [r2, #64]	@ 0x40
- 800245a:	e012      	b.n	8002482 <HAL_TIM_PeriodElapsedCallback+0xae6>
- 800245c:	4bc2      	ldr	r3, [pc, #776]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
- 800245e:	685b      	ldr	r3, [r3, #4]
- 8002460:	2b10      	cmp	r3, #16
- 8002462:	d107      	bne.n	8002474 <HAL_TIM_PeriodElapsedCallback+0xad8>
- 8002464:	4bc1      	ldr	r3, [pc, #772]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
- 8002466:	7819      	ldrb	r1, [r3, #0]
- 8002468:	4bc1      	ldr	r3, [pc, #772]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
- 800246a:	685b      	ldr	r3, [r3, #4]
- 800246c:	681a      	ldr	r2, [r3, #0]
- 800246e:	000b      	movs	r3, r1
- 8002470:	6593      	str	r3, [r2, #88]	@ 0x58
- 8002472:	e006      	b.n	8002482 <HAL_TIM_PeriodElapsedCallback+0xae6>
- 8002474:	4bbd      	ldr	r3, [pc, #756]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
- 8002476:	7819      	ldrb	r1, [r3, #0]
- 8002478:	4bbd      	ldr	r3, [pc, #756]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
- 800247a:	685b      	ldr	r3, [r3, #4]
- 800247c:	681a      	ldr	r2, [r3, #0]
- 800247e:	000b      	movs	r3, r1
- 8002480:	65d3      	str	r3, [r2, #92]	@ 0x5c
+ 8002440:	65d3      	str	r3, [r2, #92]	@ 0x5c
 			__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], systemPWM);
- 8002482:	4bb9      	ldr	r3, [pc, #740]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
- 8002484:	689b      	ldr	r3, [r3, #8]
- 8002486:	2b00      	cmp	r3, #0
- 8002488:	d106      	bne.n	8002498 <HAL_TIM_PeriodElapsedCallback+0xafc>
- 800248a:	4bb8      	ldr	r3, [pc, #736]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
- 800248c:	781a      	ldrb	r2, [r3, #0]
- 800248e:	4bb8      	ldr	r3, [pc, #736]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
- 8002490:	689b      	ldr	r3, [r3, #8]
- 8002492:	681b      	ldr	r3, [r3, #0]
- 8002494:	635a      	str	r2, [r3, #52]	@ 0x34
- 8002496:	e036      	b.n	8002506 <HAL_TIM_PeriodElapsedCallback+0xb6a>
- 8002498:	4bb3      	ldr	r3, [pc, #716]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
- 800249a:	689b      	ldr	r3, [r3, #8]
- 800249c:	2b04      	cmp	r3, #4
- 800249e:	d107      	bne.n	80024b0 <HAL_TIM_PeriodElapsedCallback+0xb14>
- 80024a0:	4bb2      	ldr	r3, [pc, #712]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
- 80024a2:	7819      	ldrb	r1, [r3, #0]
- 80024a4:	4bb2      	ldr	r3, [pc, #712]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
- 80024a6:	689b      	ldr	r3, [r3, #8]
- 80024a8:	681a      	ldr	r2, [r3, #0]
- 80024aa:	000b      	movs	r3, r1
- 80024ac:	6393      	str	r3, [r2, #56]	@ 0x38
- 80024ae:	e02a      	b.n	8002506 <HAL_TIM_PeriodElapsedCallback+0xb6a>
- 80024b0:	4bad      	ldr	r3, [pc, #692]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
- 80024b2:	689b      	ldr	r3, [r3, #8]
- 80024b4:	2b08      	cmp	r3, #8
- 80024b6:	d107      	bne.n	80024c8 <HAL_TIM_PeriodElapsedCallback+0xb2c>
+ 8002442:	4bc9      	ldr	r3, [pc, #804]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
+ 8002444:	689b      	ldr	r3, [r3, #8]
+ 8002446:	2b00      	cmp	r3, #0
+ 8002448:	d106      	bne.n	8002458 <HAL_TIM_PeriodElapsedCallback+0xabc>
+ 800244a:	4bc8      	ldr	r3, [pc, #800]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
+ 800244c:	781a      	ldrb	r2, [r3, #0]
+ 800244e:	4bc8      	ldr	r3, [pc, #800]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
+ 8002450:	689b      	ldr	r3, [r3, #8]
+ 8002452:	681b      	ldr	r3, [r3, #0]
+ 8002454:	635a      	str	r2, [r3, #52]	@ 0x34
+ 8002456:	e036      	b.n	80024c6 <HAL_TIM_PeriodElapsedCallback+0xb2a>
+ 8002458:	4bc3      	ldr	r3, [pc, #780]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
+ 800245a:	689b      	ldr	r3, [r3, #8]
+ 800245c:	2b04      	cmp	r3, #4
+ 800245e:	d107      	bne.n	8002470 <HAL_TIM_PeriodElapsedCallback+0xad4>
+ 8002460:	4bc2      	ldr	r3, [pc, #776]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
+ 8002462:	7819      	ldrb	r1, [r3, #0]
+ 8002464:	4bc2      	ldr	r3, [pc, #776]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
+ 8002466:	689b      	ldr	r3, [r3, #8]
+ 8002468:	681a      	ldr	r2, [r3, #0]
+ 800246a:	000b      	movs	r3, r1
+ 800246c:	6393      	str	r3, [r2, #56]	@ 0x38
+ 800246e:	e02a      	b.n	80024c6 <HAL_TIM_PeriodElapsedCallback+0xb2a>
+ 8002470:	4bbd      	ldr	r3, [pc, #756]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
+ 8002472:	689b      	ldr	r3, [r3, #8]
+ 8002474:	2b08      	cmp	r3, #8
+ 8002476:	d107      	bne.n	8002488 <HAL_TIM_PeriodElapsedCallback+0xaec>
+ 8002478:	4bbc      	ldr	r3, [pc, #752]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
+ 800247a:	7819      	ldrb	r1, [r3, #0]
+ 800247c:	4bbc      	ldr	r3, [pc, #752]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
+ 800247e:	689b      	ldr	r3, [r3, #8]
+ 8002480:	681a      	ldr	r2, [r3, #0]
+ 8002482:	000b      	movs	r3, r1
+ 8002484:	63d3      	str	r3, [r2, #60]	@ 0x3c
+ 8002486:	e01e      	b.n	80024c6 <HAL_TIM_PeriodElapsedCallback+0xb2a>
+ 8002488:	4bb7      	ldr	r3, [pc, #732]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
+ 800248a:	689b      	ldr	r3, [r3, #8]
+ 800248c:	2b0c      	cmp	r3, #12
+ 800248e:	d107      	bne.n	80024a0 <HAL_TIM_PeriodElapsedCallback+0xb04>
+ 8002490:	4bb6      	ldr	r3, [pc, #728]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
+ 8002492:	7819      	ldrb	r1, [r3, #0]
+ 8002494:	4bb6      	ldr	r3, [pc, #728]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
+ 8002496:	689b      	ldr	r3, [r3, #8]
+ 8002498:	681a      	ldr	r2, [r3, #0]
+ 800249a:	000b      	movs	r3, r1
+ 800249c:	6413      	str	r3, [r2, #64]	@ 0x40
+ 800249e:	e012      	b.n	80024c6 <HAL_TIM_PeriodElapsedCallback+0xb2a>
+ 80024a0:	4bb1      	ldr	r3, [pc, #708]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
+ 80024a2:	689b      	ldr	r3, [r3, #8]
+ 80024a4:	2b10      	cmp	r3, #16
+ 80024a6:	d107      	bne.n	80024b8 <HAL_TIM_PeriodElapsedCallback+0xb1c>
+ 80024a8:	4bb0      	ldr	r3, [pc, #704]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
+ 80024aa:	7819      	ldrb	r1, [r3, #0]
+ 80024ac:	4bb0      	ldr	r3, [pc, #704]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
+ 80024ae:	689b      	ldr	r3, [r3, #8]
+ 80024b0:	681a      	ldr	r2, [r3, #0]
+ 80024b2:	000b      	movs	r3, r1
+ 80024b4:	6593      	str	r3, [r2, #88]	@ 0x58
+ 80024b6:	e006      	b.n	80024c6 <HAL_TIM_PeriodElapsedCallback+0xb2a>
  80024b8:	4bac      	ldr	r3, [pc, #688]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
  80024ba:	7819      	ldrb	r1, [r3, #0]
  80024bc:	4bac      	ldr	r3, [pc, #688]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
  80024be:	689b      	ldr	r3, [r3, #8]
  80024c0:	681a      	ldr	r2, [r3, #0]
  80024c2:	000b      	movs	r3, r1
- 80024c4:	63d3      	str	r3, [r2, #60]	@ 0x3c
- 80024c6:	e01e      	b.n	8002506 <HAL_TIM_PeriodElapsedCallback+0xb6a>
- 80024c8:	4ba7      	ldr	r3, [pc, #668]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
- 80024ca:	689b      	ldr	r3, [r3, #8]
- 80024cc:	2b0c      	cmp	r3, #12
- 80024ce:	d107      	bne.n	80024e0 <HAL_TIM_PeriodElapsedCallback+0xb44>
- 80024d0:	4ba6      	ldr	r3, [pc, #664]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
- 80024d2:	7819      	ldrb	r1, [r3, #0]
- 80024d4:	4ba6      	ldr	r3, [pc, #664]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
- 80024d6:	689b      	ldr	r3, [r3, #8]
- 80024d8:	681a      	ldr	r2, [r3, #0]
- 80024da:	000b      	movs	r3, r1
- 80024dc:	6413      	str	r3, [r2, #64]	@ 0x40
- 80024de:	e012      	b.n	8002506 <HAL_TIM_PeriodElapsedCallback+0xb6a>
- 80024e0:	4ba1      	ldr	r3, [pc, #644]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
- 80024e2:	689b      	ldr	r3, [r3, #8]
- 80024e4:	2b10      	cmp	r3, #16
- 80024e6:	d107      	bne.n	80024f8 <HAL_TIM_PeriodElapsedCallback+0xb5c>
- 80024e8:	4ba0      	ldr	r3, [pc, #640]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
- 80024ea:	7819      	ldrb	r1, [r3, #0]
- 80024ec:	4ba0      	ldr	r3, [pc, #640]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
- 80024ee:	689b      	ldr	r3, [r3, #8]
- 80024f0:	681a      	ldr	r2, [r3, #0]
- 80024f2:	000b      	movs	r3, r1
- 80024f4:	6593      	str	r3, [r2, #88]	@ 0x58
- 80024f6:	e006      	b.n	8002506 <HAL_TIM_PeriodElapsedCallback+0xb6a>
- 80024f8:	4b9c      	ldr	r3, [pc, #624]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
- 80024fa:	7819      	ldrb	r1, [r3, #0]
- 80024fc:	4b9c      	ldr	r3, [pc, #624]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
- 80024fe:	689b      	ldr	r3, [r3, #8]
- 8002500:	681a      	ldr	r2, [r3, #0]
- 8002502:	000b      	movs	r3, r1
- 8002504:	65d3      	str	r3, [r2, #92]	@ 0x5c
+ 80024c4:	65d3      	str	r3, [r2, #92]	@ 0x5c
 			__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], systemPWM);
- 8002506:	4b98      	ldr	r3, [pc, #608]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
- 8002508:	68db      	ldr	r3, [r3, #12]
- 800250a:	2b00      	cmp	r3, #0
- 800250c:	d106      	bne.n	800251c <HAL_TIM_PeriodElapsedCallback+0xb80>
- 800250e:	4b97      	ldr	r3, [pc, #604]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
- 8002510:	781a      	ldrb	r2, [r3, #0]
- 8002512:	4b97      	ldr	r3, [pc, #604]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
- 8002514:	68db      	ldr	r3, [r3, #12]
- 8002516:	681b      	ldr	r3, [r3, #0]
- 8002518:	635a      	str	r2, [r3, #52]	@ 0x34
- 800251a:	e036      	b.n	800258a <HAL_TIM_PeriodElapsedCallback+0xbee>
- 800251c:	4b92      	ldr	r3, [pc, #584]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
- 800251e:	68db      	ldr	r3, [r3, #12]
- 8002520:	2b04      	cmp	r3, #4
- 8002522:	d107      	bne.n	8002534 <HAL_TIM_PeriodElapsedCallback+0xb98>
- 8002524:	4b91      	ldr	r3, [pc, #580]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
- 8002526:	7819      	ldrb	r1, [r3, #0]
- 8002528:	4b91      	ldr	r3, [pc, #580]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
- 800252a:	68db      	ldr	r3, [r3, #12]
- 800252c:	681a      	ldr	r2, [r3, #0]
- 800252e:	000b      	movs	r3, r1
- 8002530:	6393      	str	r3, [r2, #56]	@ 0x38
- 8002532:	e02a      	b.n	800258a <HAL_TIM_PeriodElapsedCallback+0xbee>
- 8002534:	4b8c      	ldr	r3, [pc, #560]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
- 8002536:	68db      	ldr	r3, [r3, #12]
- 8002538:	2b08      	cmp	r3, #8
- 800253a:	d107      	bne.n	800254c <HAL_TIM_PeriodElapsedCallback+0xbb0>
+ 80024c6:	4ba8      	ldr	r3, [pc, #672]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
+ 80024c8:	68db      	ldr	r3, [r3, #12]
+ 80024ca:	2b00      	cmp	r3, #0
+ 80024cc:	d106      	bne.n	80024dc <HAL_TIM_PeriodElapsedCallback+0xb40>
+ 80024ce:	4ba7      	ldr	r3, [pc, #668]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
+ 80024d0:	781a      	ldrb	r2, [r3, #0]
+ 80024d2:	4ba7      	ldr	r3, [pc, #668]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
+ 80024d4:	68db      	ldr	r3, [r3, #12]
+ 80024d6:	681b      	ldr	r3, [r3, #0]
+ 80024d8:	635a      	str	r2, [r3, #52]	@ 0x34
+ 80024da:	e036      	b.n	800254a <HAL_TIM_PeriodElapsedCallback+0xbae>
+ 80024dc:	4ba2      	ldr	r3, [pc, #648]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
+ 80024de:	68db      	ldr	r3, [r3, #12]
+ 80024e0:	2b04      	cmp	r3, #4
+ 80024e2:	d107      	bne.n	80024f4 <HAL_TIM_PeriodElapsedCallback+0xb58>
+ 80024e4:	4ba1      	ldr	r3, [pc, #644]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
+ 80024e6:	7819      	ldrb	r1, [r3, #0]
+ 80024e8:	4ba1      	ldr	r3, [pc, #644]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
+ 80024ea:	68db      	ldr	r3, [r3, #12]
+ 80024ec:	681a      	ldr	r2, [r3, #0]
+ 80024ee:	000b      	movs	r3, r1
+ 80024f0:	6393      	str	r3, [r2, #56]	@ 0x38
+ 80024f2:	e02a      	b.n	800254a <HAL_TIM_PeriodElapsedCallback+0xbae>
+ 80024f4:	4b9c      	ldr	r3, [pc, #624]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
+ 80024f6:	68db      	ldr	r3, [r3, #12]
+ 80024f8:	2b08      	cmp	r3, #8
+ 80024fa:	d107      	bne.n	800250c <HAL_TIM_PeriodElapsedCallback+0xb70>
+ 80024fc:	4b9b      	ldr	r3, [pc, #620]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
+ 80024fe:	7819      	ldrb	r1, [r3, #0]
+ 8002500:	4b9b      	ldr	r3, [pc, #620]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
+ 8002502:	68db      	ldr	r3, [r3, #12]
+ 8002504:	681a      	ldr	r2, [r3, #0]
+ 8002506:	000b      	movs	r3, r1
+ 8002508:	63d3      	str	r3, [r2, #60]	@ 0x3c
+ 800250a:	e01e      	b.n	800254a <HAL_TIM_PeriodElapsedCallback+0xbae>
+ 800250c:	4b96      	ldr	r3, [pc, #600]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
+ 800250e:	68db      	ldr	r3, [r3, #12]
+ 8002510:	2b0c      	cmp	r3, #12
+ 8002512:	d107      	bne.n	8002524 <HAL_TIM_PeriodElapsedCallback+0xb88>
+ 8002514:	4b95      	ldr	r3, [pc, #596]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
+ 8002516:	7819      	ldrb	r1, [r3, #0]
+ 8002518:	4b95      	ldr	r3, [pc, #596]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
+ 800251a:	68db      	ldr	r3, [r3, #12]
+ 800251c:	681a      	ldr	r2, [r3, #0]
+ 800251e:	000b      	movs	r3, r1
+ 8002520:	6413      	str	r3, [r2, #64]	@ 0x40
+ 8002522:	e012      	b.n	800254a <HAL_TIM_PeriodElapsedCallback+0xbae>
+ 8002524:	4b90      	ldr	r3, [pc, #576]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
+ 8002526:	68db      	ldr	r3, [r3, #12]
+ 8002528:	2b10      	cmp	r3, #16
+ 800252a:	d107      	bne.n	800253c <HAL_TIM_PeriodElapsedCallback+0xba0>
+ 800252c:	4b8f      	ldr	r3, [pc, #572]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
+ 800252e:	7819      	ldrb	r1, [r3, #0]
+ 8002530:	4b8f      	ldr	r3, [pc, #572]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
+ 8002532:	68db      	ldr	r3, [r3, #12]
+ 8002534:	681a      	ldr	r2, [r3, #0]
+ 8002536:	000b      	movs	r3, r1
+ 8002538:	6593      	str	r3, [r2, #88]	@ 0x58
+ 800253a:	e006      	b.n	800254a <HAL_TIM_PeriodElapsedCallback+0xbae>
  800253c:	4b8b      	ldr	r3, [pc, #556]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
  800253e:	7819      	ldrb	r1, [r3, #0]
  8002540:	4b8b      	ldr	r3, [pc, #556]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
  8002542:	68db      	ldr	r3, [r3, #12]
  8002544:	681a      	ldr	r2, [r3, #0]
  8002546:	000b      	movs	r3, r1
- 8002548:	63d3      	str	r3, [r2, #60]	@ 0x3c
- 800254a:	e01e      	b.n	800258a <HAL_TIM_PeriodElapsedCallback+0xbee>
- 800254c:	4b86      	ldr	r3, [pc, #536]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
- 800254e:	68db      	ldr	r3, [r3, #12]
- 8002550:	2b0c      	cmp	r3, #12
- 8002552:	d107      	bne.n	8002564 <HAL_TIM_PeriodElapsedCallback+0xbc8>
- 8002554:	4b85      	ldr	r3, [pc, #532]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
- 8002556:	7819      	ldrb	r1, [r3, #0]
- 8002558:	4b85      	ldr	r3, [pc, #532]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
- 800255a:	68db      	ldr	r3, [r3, #12]
- 800255c:	681a      	ldr	r2, [r3, #0]
- 800255e:	000b      	movs	r3, r1
- 8002560:	6413      	str	r3, [r2, #64]	@ 0x40
- 8002562:	e012      	b.n	800258a <HAL_TIM_PeriodElapsedCallback+0xbee>
- 8002564:	4b80      	ldr	r3, [pc, #512]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
- 8002566:	68db      	ldr	r3, [r3, #12]
- 8002568:	2b10      	cmp	r3, #16
- 800256a:	d107      	bne.n	800257c <HAL_TIM_PeriodElapsedCallback+0xbe0>
- 800256c:	4b7f      	ldr	r3, [pc, #508]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
- 800256e:	7819      	ldrb	r1, [r3, #0]
- 8002570:	4b7f      	ldr	r3, [pc, #508]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
- 8002572:	68db      	ldr	r3, [r3, #12]
- 8002574:	681a      	ldr	r2, [r3, #0]
- 8002576:	000b      	movs	r3, r1
- 8002578:	6593      	str	r3, [r2, #88]	@ 0x58
- 800257a:	e006      	b.n	800258a <HAL_TIM_PeriodElapsedCallback+0xbee>
- 800257c:	4b7b      	ldr	r3, [pc, #492]	@ (800276c <HAL_TIM_PeriodElapsedCallback+0xdd0>)
- 800257e:	7819      	ldrb	r1, [r3, #0]
- 8002580:	4b7b      	ldr	r3, [pc, #492]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
- 8002582:	68db      	ldr	r3, [r3, #12]
- 8002584:	681a      	ldr	r2, [r3, #0]
- 8002586:	000b      	movs	r3, r1
- 8002588:	65d3      	str	r3, [r2, #92]	@ 0x5c
+ 8002548:	65d3      	str	r3, [r2, #92]	@ 0x5c
+			HAL_TIM_PWM_Start(timerPWM[0], PWMChannels[0]);
+ 800254a:	4b89      	ldr	r3, [pc, #548]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
+ 800254c:	681a      	ldr	r2, [r3, #0]
+ 800254e:	4b86      	ldr	r3, [pc, #536]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
+ 8002550:	681b      	ldr	r3, [r3, #0]
+ 8002552:	0019      	movs	r1, r3
+ 8002554:	0010      	movs	r0, r2
+ 8002556:	f004 fe99 	bl	800728c <HAL_TIM_PWM_Start>
+			HAL_TIM_PWM_Start(timerPWM[1], PWMChannels[1]);
+ 800255a:	4b85      	ldr	r3, [pc, #532]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
+ 800255c:	685a      	ldr	r2, [r3, #4]
+ 800255e:	4b82      	ldr	r3, [pc, #520]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
+ 8002560:	685b      	ldr	r3, [r3, #4]
+ 8002562:	0019      	movs	r1, r3
+ 8002564:	0010      	movs	r0, r2
+ 8002566:	f004 fe91 	bl	800728c <HAL_TIM_PWM_Start>
+			HAL_TIM_PWM_Start(timerPWM[2], PWMChannels[2]);
+ 800256a:	4b81      	ldr	r3, [pc, #516]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
+ 800256c:	689a      	ldr	r2, [r3, #8]
+ 800256e:	4b7e      	ldr	r3, [pc, #504]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
+ 8002570:	689b      	ldr	r3, [r3, #8]
+ 8002572:	0019      	movs	r1, r3
+ 8002574:	0010      	movs	r0, r2
+ 8002576:	f004 fe89 	bl	800728c <HAL_TIM_PWM_Start>
+			HAL_TIM_PWM_Start(timerPWM[3], PWMChannels[3]);
+ 800257a:	4b7d      	ldr	r3, [pc, #500]	@ (8002770 <HAL_TIM_PeriodElapsedCallback+0xdd4>)
+ 800257c:	68da      	ldr	r2, [r3, #12]
+ 800257e:	4b7a      	ldr	r3, [pc, #488]	@ (8002768 <HAL_TIM_PeriodElapsedCallback+0xdcc>)
+ 8002580:	68db      	ldr	r3, [r3, #12]
+ 8002582:	0019      	movs	r1, r3
+ 8002584:	0010      	movs	r0, r2
+ 8002586:	f004 fe81 	bl	800728c <HAL_TIM_PWM_Start>
+
 		}
 
 		songIndex++;
