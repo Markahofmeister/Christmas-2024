@@ -124,7 +124,7 @@ bool inJam = false;
 uint32_t flashReadAddr = initialMemoryOffset;
 
 // Used to keep track of where the song is and trigger LED changes.
-uint32_t songIndex = 1400;
+uint32_t songIndex = 1600;
 
 uint8_t audioEn = 0;
 
@@ -134,7 +134,7 @@ uint8_t dimNum = 0;
 
 uint8_t systemPWM = 50;
 
-uint32_t timerChangeIndex[4] = {1034, 0x00, 0x00, 1470};
+uint32_t timerChangeIndex[5] = {1034, 0x00, 0x00, 1470, 1790};
 
 /* USER CODE END PV */
 
@@ -779,6 +779,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	if(htim == timerLED) {
 		GPIOB->ODR = leds[songIndex];
 
+		if(leds[songIndex] == 0x1111) {
+			__NOP();
+		}
+
 
 		if(songIndex == 503) {
 			// Start timer to change PWM duty cycle
@@ -954,6 +958,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 			// Double Time
 			timerLED->Instance->ARR = (timerLED->Instance->ARR) / 2;
 
+		}
+
+		else if (songIndex == timerChangeIndex[4]) {
+			// Quad Time
+			timerLED->Instance->ARR = ((timerLED->Instance->ARR) / 3)*2;
 		}
 
 		songIndex++;
