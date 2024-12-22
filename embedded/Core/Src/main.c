@@ -120,13 +120,15 @@ bool jamStart = false;
 // Are we already jamming?
 bool inJam = false;
 
+bool stopStream = false;
+
 // Variable to keep track of where to read audio data from in memory
 uint32_t flashReadAddr = initialMemoryOffset;
 
 // Used to keep track of where the song is and trigger LED changes.
 uint32_t songIndex = 0;
 
-uint8_t audioEn = 1;
+uint8_t audioEn = 0;
 
 uint32_t dimIndex = 0;
 
@@ -269,6 +271,7 @@ int main(void)
 		if(jamStart && !inJam) {
 			startAudioStream();
 		}
+
 
 	  /* USER CODE END WHILE */
 
@@ -720,7 +723,7 @@ static void MX_GPIO_Init(void)
 void flashInit(void) {
 
 	uint8_t initPWM = systemPWM;
-	uint8_t delay = 1;
+	uint8_t delay = 40;
 
 	__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], initPWM);
 	HAL_TIM_PWM_Start(timerPWM[0], PWMChannels[0]);
@@ -752,6 +755,13 @@ void flashInit(void) {
 		HAL_GPIO_WritePin(GPIOPort, GPIOPins[i], GPIO_PIN_RESET);
 
 	}
+
+	__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], systemPWM / 2);
+	__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], systemPWM / 2);
+	__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], systemPWM / 2);
+	__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], systemPWM / 2);
+
+	GPIOB->ODR = 0xFFFF;
 
 }
 
@@ -1005,6 +1015,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 
 		}
 
+
 		songIndex++;
 	}
 
@@ -1147,6 +1158,9 @@ void dispFailure(void) {
  */
 void startAudioStream(void) {
 
+
+	GPIOB->ODR = 0x0000;
+
 	// We are in jam now.
 	inJam = true;
 
@@ -1181,7 +1195,9 @@ void stopAudioStream(void) {
 	NAU8315YG_AmpDisable(&i2sAmp);
 
 	// Stop DMA Stream
-	HAL_I2S_DMAStop(&hi2s1);
+	HAL_StatusTypeDef halRet = HAL_I2S_DMAStop(&hi2s1);
+
+	__NOP();
 
 	// Reset memory address pointer
 	flashReadAddr = initialMemoryOffset;
@@ -1193,7 +1209,16 @@ void stopAudioStream(void) {
 	songIndex = 0;
 
 	// Stop LED timer
-	HAL_TIM_Base_Stop_IT(timerLED);
+
+	halRet = HAL_TIM_Base_Stop_IT(timerLED);
+	halRet = HAL_TIM_Base_Stop_IT(timerDim);
+
+	__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], systemPWM / 2);
+	__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], systemPWM / 2);
+	__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], systemPWM / 2);
+	__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], systemPWM / 2);
+
+	GPIOB->ODR = 0xFFFF;
 
 }
 
@@ -1233,6 +1258,7 @@ void fillTxBuffer(uint16_t offset) {
 
 	// If we have reached the end of the audio clip, reset flash read address
 	if(flashReadAddr > audioAddr_END) {
+
 		stopAudioStream();
 	}
 
