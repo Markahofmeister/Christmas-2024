@@ -124,9 +124,9 @@ bool inJam = false;
 uint32_t flashReadAddr = initialMemoryOffset;
 
 // Used to keep track of where the song is and trigger LED changes.
-uint32_t songIndex = 1600;
+uint32_t songIndex = 0;
 
-uint8_t audioEn = 0;
+uint8_t audioEn = 1;
 
 uint32_t dimIndex = 0;
 
@@ -134,7 +134,7 @@ uint8_t dimNum = 0;
 
 uint8_t systemPWM = 50;
 
-uint32_t timerChangeIndex[5] = {1034, 0x00, 0x00, 1470, 1790};
+uint32_t timerChangeIndex[7] = {1034, 0x00, 0x00, 1470, 1790, 2154, 2154 + 28};
 
 /* USER CODE END PV */
 
@@ -254,8 +254,8 @@ int main(void)
 		// Increase SPI clk driver power
 		GPIOA->OSPEEDR |= 0b11;
 
-		timerChangeIndex[1] = timerChangeIndex[0] + 72;
-		timerChangeIndex[2] = timerChangeIndex[1] + 64;
+		timerChangeIndex[1] = timerChangeIndex[0] + 70;
+		timerChangeIndex[2] = timerChangeIndex[1] + 66;
 
 	  /* USER CODE END 2 */
 
@@ -777,11 +777,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 
 
 	if(htim == timerLED) {
-		GPIOB->ODR = leds[songIndex];
 
-		if(leds[songIndex] == 0x1111) {
-			__NOP();
-		}
+		GPIOB->ODR = leds[songIndex];
 
 
 		if(songIndex == 503) {
@@ -959,10 +956,53 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 			timerLED->Instance->ARR = (timerLED->Instance->ARR) / 2;
 
 		}
-
 		else if (songIndex == timerChangeIndex[4]) {
 			// Quad Time
 			timerLED->Instance->ARR = ((timerLED->Instance->ARR) / 3)*2;
+		}
+		else if (songIndex == timerChangeIndex[5])  {
+
+			timerLED->Instance->ARR = 50940;
+
+			dimNum = 20;
+			dimIndex = 0;
+
+			timerPWM[0]->Instance->ARR = 800;
+			timerPWM[2]->Instance->ARR = 800;
+			HAL_TIM_PWM_Start(timerPWM[0], PWMChannels[0]);
+			HAL_TIM_PWM_Start(timerPWM[1], PWMChannels[1]);
+			HAL_TIM_PWM_Start(timerPWM[2], PWMChannels[2]);
+			HAL_TIM_PWM_Start(timerPWM[3], PWMChannels[3]);
+
+			HAL_TIM_Base_Stop_IT(timerDim);
+			timerDim->Instance->PSC = 3-1;
+			timerDim->Instance->ARR = 60000;
+			timerDim->Instance->CNT = 0;
+			HAL_TIM_Base_Start_IT(timerDim);
+
+		}
+		else if (songIndex == timerChangeIndex[6]) {
+
+			dimNum = 21;
+			dimIndex = 0;
+
+			timerPWM[0]->Instance->ARR = 100;
+			timerPWM[2]->Instance->ARR = 100;
+			__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], 0);
+			__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], 0);
+			__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], 0);
+			__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], 0);
+			HAL_TIM_PWM_Start(timerPWM[0], PWMChannels[0]);
+			HAL_TIM_PWM_Start(timerPWM[1], PWMChannels[1]);
+			HAL_TIM_PWM_Start(timerPWM[2], PWMChannels[2]);
+			HAL_TIM_PWM_Start(timerPWM[3], PWMChannels[3]);
+
+			HAL_TIM_Base_Stop_IT(timerDim);
+			timerDim->Instance->PSC = 17-1;
+			timerDim->Instance->ARR = 60000;
+			timerDim->Instance->CNT = 0;
+			HAL_TIM_Base_Start_IT(timerDim);
+
 		}
 
 		songIndex++;
@@ -1036,6 +1076,24 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 				__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], dimBuffLog[dimIndex]);
 				__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], dimBuffLog[dimIndex]);
 				__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], dimBuffLog[dimIndex]);
+				dimIndex += 1;
+			}
+		}
+		else if (dimNum == 20) {
+			if(dimIndex < 801) {
+				__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], dimBuffLog[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], dimBuffLog[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], dimBuffLog[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], dimBuffLog[dimIndex]);
+				dimIndex += 1;
+			}
+		}
+		else if (dimNum == 21) {
+			if(dimIndex < 101) {
+				__HAL_TIM_SET_COMPARE(timerPWM[0], PWMChannels[0], dimBuff[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[1], PWMChannels[1], dimBuff[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[2], PWMChannels[2], dimBuff[dimIndex]);
+				__HAL_TIM_SET_COMPARE(timerPWM[3], PWMChannels[3], dimBuff[dimIndex]);
 				dimIndex += 1;
 			}
 		}
