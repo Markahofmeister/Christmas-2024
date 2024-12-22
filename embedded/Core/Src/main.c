@@ -786,7 +786,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 			HAL_TIM_Base_Start_IT(timerDim);
 			dimNum = 1;
 		}
-		else if(songIndex == 575) {
+		else if(songIndex == 571) {
 			HAL_TIM_Base_Start_IT(timerDim);
 			dimNum = 2;
 			dimIndex = 0;

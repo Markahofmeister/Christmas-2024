@@ -4171,7 +4171,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  80019da:	701a      	strb	r2, [r3, #0]
  80019dc:	f000 ffa6 	bl	800292c <HAL_TIM_PeriodElapsedCallback+0xf90>
 		}
-		else if(songIndex == 575) {
+		else if(songIndex == 571) {
  80019e0:	4bc2      	ldr	r3, [pc, #776]	@ (8001cec <HAL_TIM_PeriodElapsedCallback+0x350>)
  80019e2:	681b      	ldr	r3, [r3, #0]
  80019e4:	4ac6      	ldr	r2, [pc, #792]	@ (8001d00 <HAL_TIM_PeriodElapsedCallback+0x364>)
@@ -4571,7 +4571,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  8001cf4:	50000400 	.word	0x50000400
  8001cf8:	2000004c 	.word	0x2000004c
  8001cfc:	2000049c 	.word	0x2000049c
- 8001d00:	0000023f 	.word	0x0000023f
+ 8001d00:	0000023b 	.word	0x0000023b
  8001d04:	20000498 	.word	0x20000498
  8001d08:	20000028 	.word	0x20000028
  8001d0c:	20000051 	.word	0x20000051
