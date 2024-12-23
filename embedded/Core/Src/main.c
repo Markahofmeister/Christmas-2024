@@ -128,7 +128,7 @@ uint32_t flashReadAddr = initialMemoryOffset;
 // Used to keep track of where the song is and trigger LED changes.
 uint32_t songIndex = 0;
 
-uint8_t audioEn = 0;
+uint8_t audioEn = 1;
 
 uint32_t dimIndex = 0;
 

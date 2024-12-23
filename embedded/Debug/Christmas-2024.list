@@ -21,9 +21,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
   8 .data         0000007c  20000000  0800b008  0000d000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          0000042c  2000007c  0800b084  0000d07c  2**2
+  9 .bss          00000428  2000007c  0800b084  0000d07c  2**2
                   ALLOC
- 10 ._user_heap_stack 00000600  200004a8  0800b084  0000d4a8  2**0
+ 10 ._user_heap_stack 00000604  200004a4  0800b084  0000d4a4  2**0
                   ALLOC
  11 .ARM.attributes 00000028  00000000  00000000  0000d07c  2**0
                   CONTENTS, READONLY
@@ -4115,7 +4115,7 @@ void flashInit(void) {
  800199a:	000b      	movs	r3, r1
  800199c:	63d3      	str	r3, [r2, #60]	@ 0x3c
  800199e:	e02e      	b.n	80019fe <flashInit+0x3b6>
- 80019a0:	20000050 	.word	0x20000050
+ 80019a0:	20000051 	.word	0x20000051
  80019a4:	20000028 	.word	0x20000028
  80019a8:	20000038 	.word	0x20000038
  80019ac:	50000400 	.word	0x50000400
@@ -4406,7 +4406,7 @@ void flashInit(void) {
  8001bdc:	b00d      	add	sp, #52	@ 0x34
  8001bde:	bd90      	pop	{r4, r7, pc}
  8001be0:	20000028 	.word	0x20000028
- 8001be4:	20000050 	.word	0x20000050
+ 8001be4:	20000051 	.word	0x20000051
  8001be8:	20000038 	.word	0x20000038
  8001bec:	50000400 	.word	0x50000400
  8001bf0:	0000ffff 	.word	0x0000ffff
@@ -4896,11 +4896,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  8001f78:	08009064 	.word	0x08009064
  8001f7c:	50000400 	.word	0x50000400
  8001f80:	2000004c 	.word	0x2000004c
- 8001f84:	200004a0 	.word	0x200004a0
+ 8001f84:	2000049c 	.word	0x2000049c
  8001f88:	0000023b 	.word	0x0000023b
- 8001f8c:	2000049c 	.word	0x2000049c
+ 8001f8c:	20000498 	.word	0x20000498
  8001f90:	20000028 	.word	0x20000028
- 8001f94:	20000050 	.word	0x20000050
+ 8001f94:	20000051 	.word	0x20000051
  8001f98:	20000038 	.word	0x20000038
  8001f9c:	00000275 	.word	0x00000275
  8001fa0:	000002b5 	.word	0x000002b5
@@ -5357,13 +5357,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  80022ea:	0018      	movs	r0, r3
  80022ec:	f005 fe2c 	bl	8007f48 <HAL_TIM_Base_Start_IT>
  80022f0:	f000 fc60 	bl	8002bb4 <HAL_TIM_PeriodElapsedCallback+0xf90>
- 80022f4:	20000050 	.word	0x20000050
+ 80022f4:	20000051 	.word	0x20000051
  80022f8:	20000038 	.word	0x20000038
  80022fc:	20000028 	.word	0x20000028
  8002300:	20000494 	.word	0x20000494
  8002304:	000003cd 	.word	0x000003cd
- 8002308:	200004a0 	.word	0x200004a0
- 800230c:	2000049c 	.word	0x2000049c
+ 8002308:	2000049c 	.word	0x2000049c
+ 800230c:	20000498 	.word	0x20000498
  8002310:	2000004c 	.word	0x2000004c
  8002314:	20000054 	.word	0x20000054
  8002318:	0000c350 	.word	0x0000c350
@@ -5872,13 +5872,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  800269e:	46c0      	nop			@ (mov r8, r8)
  80026a0:	20000054 	.word	0x20000054
  80026a4:	20000494 	.word	0x20000494
- 80026a8:	200004a0 	.word	0x200004a0
- 80026ac:	2000049c 	.word	0x2000049c
+ 80026a8:	2000049c 	.word	0x2000049c
+ 80026ac:	20000498 	.word	0x20000498
  80026b0:	2000004c 	.word	0x2000004c
  80026b4:	0000ea60 	.word	0x0000ea60
  80026b8:	20000038 	.word	0x20000038
  80026bc:	20000028 	.word	0x20000028
- 80026c0:	20000050 	.word	0x20000050
+ 80026c0:	20000051 	.word	0x20000051
  80026c4:	4bd5      	ldr	r3, [pc, #852]	@ (8002a1c <HAL_TIM_PeriodElapsedCallback+0xdf8>)
  80026c6:	685b      	ldr	r3, [r3, #4]
  80026c8:	2b10      	cmp	r3, #16
@@ -6345,14 +6345,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  8002a18:	e025      	b.n	8002a66 <HAL_TIM_PeriodElapsedCallback+0xe42>
  8002a1a:	46c0      	nop			@ (mov r8, r8)
  8002a1c:	20000028 	.word	0x20000028
- 8002a20:	20000050 	.word	0x20000050
+ 8002a20:	20000051 	.word	0x20000051
  8002a24:	20000038 	.word	0x20000038
  8002a28:	20000054 	.word	0x20000054
  8002a2c:	20000494 	.word	0x20000494
  8002a30:	20000048 	.word	0x20000048
  8002a34:	0000c6fc 	.word	0x0000c6fc
- 8002a38:	200004a0 	.word	0x200004a0
- 8002a3c:	2000049c 	.word	0x2000049c
+ 8002a38:	2000049c 	.word	0x2000049c
+ 8002a3c:	20000498 	.word	0x20000498
  8002a40:	2000004c 	.word	0x2000004c
  8002a44:	0000ea60 	.word	0x0000ea60
  8002a48:	4bd1      	ldr	r3, [pc, #836]	@ (8002d90 <HAL_TIM_PeriodElapsedCallback+0x116c>)
@@ -6800,8 +6800,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  8002d98:	2000004c 	.word	0x2000004c
  8002d9c:	0000ea60 	.word	0x0000ea60
  8002da0:	20000494 	.word	0x20000494
- 8002da4:	200004a0 	.word	0x200004a0
- 8002da8:	2000049c 	.word	0x2000049c
+ 8002da4:	2000049c 	.word	0x2000049c
+ 8002da8:	20000498 	.word	0x20000498
  8002dac:	0800a7d4 	.word	0x0800a7d4
  8002db0:	4bd8      	ldr	r3, [pc, #864]	@ (8003114 <HAL_TIM_PeriodElapsedCallback+0x14f0>)
  8002db2:	689b      	ldr	r3, [r3, #8]
@@ -7249,10 +7249,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  8003110:	63d3      	str	r3, [r2, #60]	@ 0x3c
  8003112:	e02e      	b.n	8003172 <HAL_TIM_PeriodElapsedCallback+0x154e>
  8003114:	20000028 	.word	0x20000028
- 8003118:	2000049c 	.word	0x2000049c
+ 8003118:	20000498 	.word	0x20000498
  800311c:	0800a7d4 	.word	0x0800a7d4
  8003120:	20000038 	.word	0x20000038
- 8003124:	200004a0 	.word	0x200004a0
+ 8003124:	2000049c 	.word	0x2000049c
  8003128:	4bcc      	ldr	r3, [pc, #816]	@ (800345c <HAL_TIM_PeriodElapsedCallback+0x1838>)
  800312a:	68db      	ldr	r3, [r3, #12]
  800312c:	2b0c      	cmp	r3, #12
@@ -7673,10 +7673,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 }
  8003458:	f000 fee7 	bl	800422a <HAL_TIM_PeriodElapsedCallback+0x2606>
  800345c:	20000028 	.word	0x20000028
- 8003460:	2000049c 	.word	0x2000049c
+ 8003460:	20000498 	.word	0x20000498
  8003464:	0800a7d4 	.word	0x0800a7d4
  8003468:	20000038 	.word	0x20000038
- 800346c:	200004a0 	.word	0x200004a0
+ 800346c:	2000049c 	.word	0x2000049c
 		else if (dimNum >= 6 && dimNum <= 13) {
  8003470:	4bd3      	ldr	r3, [pc, #844]	@ (80037c0 <HAL_TIM_PeriodElapsedCallback+0x1b9c>)
  8003472:	781b      	ldrb	r3, [r3, #0]
@@ -8109,8 +8109,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  80037ba:	6593      	str	r3, [r2, #88]	@ 0x58
  80037bc:	e013      	b.n	80037e6 <HAL_TIM_PeriodElapsedCallback+0x1bc2>
  80037be:	46c0      	nop			@ (mov r8, r8)
- 80037c0:	200004a0 	.word	0x200004a0
- 80037c4:	2000049c 	.word	0x2000049c
+ 80037c0:	2000049c 	.word	0x2000049c
+ 80037c4:	20000498 	.word	0x20000498
  80037c8:	20000028 	.word	0x20000028
  80037cc:	0800a83c 	.word	0x0800a83c
  80037d0:	20000038 	.word	0x20000038
@@ -8543,11 +8543,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  8003b1a:	6593      	str	r3, [r2, #88]	@ 0x58
  8003b1c:	e016      	b.n	8003b4c <HAL_TIM_PeriodElapsedCallback+0x1f28>
  8003b1e:	46c0      	nop			@ (mov r8, r8)
- 8003b20:	2000049c 	.word	0x2000049c
+ 8003b20:	20000498 	.word	0x20000498
  8003b24:	0800a83c 	.word	0x0800a83c
  8003b28:	20000038 	.word	0x20000038
  8003b2c:	20000028 	.word	0x20000028
- 8003b30:	200004a0 	.word	0x200004a0
+ 8003b30:	2000049c 	.word	0x2000049c
  8003b34:	0800a908 	.word	0x0800a908
  8003b38:	4bcb      	ldr	r3, [pc, #812]	@ (8003e68 <HAL_TIM_PeriodElapsedCallback+0x2244>)
  8003b3a:	681a      	ldr	r2, [r3, #0]
@@ -8966,11 +8966,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  8003e62:	000b      	movs	r3, r1
  8003e64:	63d3      	str	r3, [r2, #60]	@ 0x3c
  8003e66:	e031      	b.n	8003ecc <HAL_TIM_PeriodElapsedCallback+0x22a8>
- 8003e68:	2000049c 	.word	0x2000049c
+ 8003e68:	20000498 	.word	0x20000498
  8003e6c:	0800a908 	.word	0x0800a908
  8003e70:	20000038 	.word	0x20000038
  8003e74:	20000028 	.word	0x20000028
- 8003e78:	200004a0 	.word	0x200004a0
+ 8003e78:	2000049c 	.word	0x2000049c
  8003e7c:	4bcf      	ldr	r3, [pc, #828]	@ (80041bc <HAL_TIM_PeriodElapsedCallback+0x2598>)
  8003e7e:	689b      	ldr	r3, [r3, #8]
  8003e80:	2b0c      	cmp	r3, #12
@@ -9397,10 +9397,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  80041b8:	e031      	b.n	800421e <HAL_TIM_PeriodElapsedCallback+0x25fa>
  80041ba:	46c0      	nop			@ (mov r8, r8)
  80041bc:	20000028 	.word	0x20000028
- 80041c0:	2000049c 	.word	0x2000049c
+ 80041c0:	20000498 	.word	0x20000498
  80041c4:	0800a908 	.word	0x0800a908
  80041c8:	20000038 	.word	0x20000038
- 80041cc:	200004a0 	.word	0x200004a0
+ 80041cc:	2000049c 	.word	0x2000049c
  80041d0:	0800a7d4 	.word	0x0800a7d4
  80041d4:	4b17      	ldr	r3, [pc, #92]	@ (8004234 <HAL_TIM_PeriodElapsedCallback+0x2610>)
  80041d6:	68db      	ldr	r3, [r3, #12]
@@ -9453,7 +9453,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  8004230:	bd80      	pop	{r7, pc}
  8004232:	46c0      	nop			@ (mov r8, r8)
  8004234:	20000028 	.word	0x20000028
- 8004238:	2000049c 	.word	0x2000049c
+ 8004238:	20000498 	.word	0x20000498
  800423c:	0800a7d4 	.word	0x0800a7d4
  8004240:	20000038 	.word	0x20000038
 
@@ -9583,7 +9583,7 @@ void startAudioStream(void) {
  80042dc:	2000048c 	.word	0x2000048c
  80042e0:	2000038c 	.word	0x2000038c
  80042e4:	2000009c 	.word	0x2000009c
- 80042e8:	20000498 	.word	0x20000498
+ 80042e8:	20000050 	.word	0x20000050
  80042ec:	2000033c 	.word	0x2000033c
  80042f0:	20000048 	.word	0x20000048
 
@@ -9988,7 +9988,7 @@ void stopAudioStream(void) {
  80045d8:	20000048 	.word	0x20000048
  80045dc:	2000004c 	.word	0x2000004c
  80045e0:	20000028 	.word	0x20000028
- 80045e4:	20000050 	.word	0x20000050
+ 80045e4:	20000051 	.word	0x20000051
  80045e8:	20000038 	.word	0x20000038
  80045ec:	50000400 	.word	0x50000400
  80045f0:	0000ffff 	.word	0x0000ffff
@@ -11260,7 +11260,7 @@ LoopForever:
   ldr r2, =_sbss
  8004c28:	2000007c 	.word	0x2000007c
   ldr r4, =_ebss
- 8004c2c:	200004a8 	.word	0x200004a8
+ 8004c2c:	200004a4 	.word	0x200004a4
 
 08004c30 <ADC1_IRQHandler>:
  * @retval None
@@ -11463,7 +11463,7 @@ __weak void HAL_IncTick(void)
  8004d20:	bd80      	pop	{r7, pc}
  8004d22:	46c0      	nop			@ (mov r8, r8)
  8004d24:	20000078 	.word	0x20000078
- 8004d28:	200004a4 	.word	0x200004a4
+ 8004d28:	200004a0 	.word	0x200004a0
 
 08004d2c <HAL_GetTick>:
   * @note This function is declared as __weak to be overwritten in case of other
@@ -11482,7 +11482,7 @@ __weak uint32_t HAL_GetTick(void)
  8004d36:	46bd      	mov	sp, r7
  8004d38:	bd80      	pop	{r7, pc}
  8004d3a:	46c0      	nop			@ (mov r8, r8)
- 8004d3c:	200004a4 	.word	0x200004a4
+ 8004d3c:	200004a0 	.word	0x200004a0
 
 08004d40 <HAL_Delay>:
   *       implementations in user file.
